@@ -158,11 +158,23 @@ function chapters(P){const C=[];let cur=null;
  const good=C.filter(c=>c.p.length);
  if(good.length<2){const out=[];for(let i=0;i<P.length;i+=40)out.push({t:"Part "+(out.length+1),p:P.slice(i,i+40)});return out}
  return good}
+function coverData(title,author,id){
+ const palettes=[["#203b57","#f1e9dc"],["#7b3f43","#f5e9d7"],["#45584c","#e8e6d8"],["#b18a52","#1d2630"],["#5a526f","#f0e8dc"],["#314f58","#f2e9d8"]];
+ let h=0;for(const ch of id)h=(h*31+ch.charCodeAt(0))>>>0;const [bg,fg]=palettes[h%palettes.length];
+ const words=String(title||"Untitled").split(/\\s+/),lines=[];let line="";
+ for(const w of words){if((line+" "+w).trim().length>17&&line){lines.push(line);line=w}else line=(line+" "+w).trim()}if(line)lines.push(line);
+ const escXml=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+ const titleSvg=lines.slice(0,5).map((v,i)=>'<text x="28" y="'+(185+i*34)+'" font-family="Georgia,serif" font-size="26" font-style="italic" fill="'+fg+'">'+escXml(v)+'</text>').join("");
+ const svg='<svg xmlns="http://www.w3.org/2000/svg" width="360" height="510" viewBox="0 0 360 510"><rect width="360" height="510" fill="'+bg+'"/><rect x="15" y="15" width="330" height="480" fill="none" stroke="'+fg+'" stroke-opacity=".55"/><text x="28" y="70" font-family="Arial,sans-serif" font-size="13" letter-spacing="3" fill="'+fg+'">STILLPOINT / LIBRARY</text><path d="M28 112H332" stroke="'+fg+'" stroke-opacity=".6"/>'+titleSvg+'<text x="28" y="438" font-family="Arial,sans-serif" font-size="14" letter-spacing="2" fill="'+fg+'">'+escXml(author||"A READING EDITION").slice(0,34)+'</text><path d="M28 460H332" stroke="'+fg+'" stroke-opacity=".6"/></svg>';
+ return "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)
+}
+let activeFilter="all";
+$("#shelfFilters").querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{activeFilter=b.dataset.filter;$("#shelfFilters").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));shelf()});
 async function importFiles(files){let n=0;
  for(const f of files){toast("Importing "+(n+1)+" of "+files.length+"…");
   try{const P=clean(await f.text()),C=chapters(P),id="b"+Date.now()+Math.random().toString(36).slice(2,6);
    const title=f.name.replace(/\.txt$/i,"").replace(/[_]+/g," ").trim();
-   await DB.put("text",{id,ch:C,source:(f&&f.name)||null});await DB.put("meta",{id,title,n:C.length,added:Date.now(),at:0,i:0,y:0,pr:0,source:(f&&f.name)||null});n++}
+   await DB.put("text",{id,ch:C,source:(f&&f.name)||null});await DB.put("meta",{id,title,n:C.length,added:Date.now(),at:0,i:0,y:0,pr:0,status:"want",source:(f&&f.name)||null});n++}
   catch(e){toast("Could not import "+f.name)}}
  if(n)toast("Added "+n+(n>1?" books.":" book."));shelf()}
 async function importRootBooks(){
@@ -194,9 +206,9 @@ async function home(){
   const l=M.filter(m=>m.at).sort((a,b)=>b.at-a.at)[0];
   $("#hr").innerHTML=l?"<b>Continue</b> "+esc(l.title)+'<i><b style="width:'+l.pr+'%"></b></i>':""}catch(e){$("#hm").textContent="Storage unavailable"}}
 async function shelf(){let M=[];try{M=await DB.all("meta")}catch(e){}
- M.sort((a,b)=>(b.at||b.added)-(a.at||a.added));const el=$("#shelf");
+ M.sort((a,b)=>(b.at||b.added)-(a.at||a.added));if(activeFilter!=="all")M=M.filter(m=>(m.status||"want")===activeFilter);const el=$("#shelf");
  if(!M.length){el.innerHTML='<div class="em">Add your first book. Choose one or more .txt files and Stillpoint will tidy them and find the chapters.</div>';return}
- el.innerHTML=M.map(m=>'<div class="bk"><div class="cv"><img alt="Book cover" src="'+(m.cover||"")+'"></div><button class="o" data-o="'+m.id+'"><div class="t">'+esc(m.title)+'</div><div class="s">'+m.n+" chapters · "+m.pr+'% read</div><i><b style="width:'+m.pr+'%"></b></i></button><button class="x" data-status="'+m.id+'">'+({want:"Want to read",reading:"Currently reading",finished:"Finished"}[m.status||"want"])+'</button><button class="x" data-x="'+m.id+'">Remove</button></div>').join("");
+ el.innerHTML=M.map(m=>'<div class="bk"><div class="cv"><img alt="Book cover" src="'+coverData(m.title,m.author,m.id)+'"></div><button class="o" data-o="'+m.id+'"><div class="t">'+esc(m.title)+'</div><div class="s">'+m.n+" chapters · "+m.pr+'% read</div><i><b style="width:'+m.pr+'%"></b></i></button><button class="x" data-status="'+m.id+'">'+({want:"Want to read",reading:"Currently reading",finished:"Finished"}[m.status||"want"])+'</button><button class="x" data-x="'+m.id+'">Remove</button></div>').join("");
  el.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>openBook(b.dataset.o));\n el.querySelectorAll("[data-status]").forEach(b=>b.onclick=async()=>{const m=await DB.get("meta",b.dataset.status);const opts=["want","reading","finished"];m.status=opts[(opts.indexOf(m.status||"want")+1)%opts.length];await DB.put("meta",m);shelf()});
  el.querySelectorAll("[data-x]").forEach(b=>b.onclick=async()=>{if(!confirm("Remove this book and its highlights?"))return;
   const id=b.dataset.x;await DB.del("meta",id);await DB.del("text",id);for(const k of (await DB.all("marks")).filter(k=>k.b===id))await DB.del("marks",k.id);shelf()})}
