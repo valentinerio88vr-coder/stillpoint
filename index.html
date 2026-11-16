@@ -93,9 +93,24 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-of
 .ph{font-family:Literata,Georgia,serif;font-size:21px;letter-spacing:.08em;text-align:center;padding:16px 8px;border:1px solid var(--rule);border-radius:8px;margin:14px 0;user-select:all}select.in{appearance:none;background:none}
 #ex{overflow:auto;padding:0 22px 40px}.card{font-family:Literata,Georgia,serif;font-size:21px;line-height:1.55;min-height:34vh;padding:24px 2px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column;justify-content:center}.lkr{display:flex;flex-wrap:wrap;gap:2px 22px;padding:0 22px 6px}
 #home .c3{background:#1F3F66;color:#E3E6E1;border:0;text-align:left;padding:16px 30px;display:flex;justify-content:space-between;align-items:baseline;width:100%;flex:none}.c3 .dt3{font-family:Newsreader,Georgia,serif;font-size:26px}.c3 .m3{font-size:13px;opacity:.75}
+
+/* opening wordmark */
+#intro{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:#101923;color:#eee8dc;opacity:1;visibility:visible;transition:opacity .85s ease,visibility .85s ease}
+#intro.out{opacity:0;visibility:hidden;pointer-events:none}
+#intro .intro-inner{text-align:center;padding:24px}
+#intro .intro-kicker{font:500 10px/1.4 "Hanken Grotesk",sans-serif;letter-spacing:.42em;text-transform:uppercase;opacity:0;animation:introFade .9s .15s ease forwards}
+#intro .intro-title{margin-top:22px;font:italic 400 clamp(42px,8vw,76px)/.98 "Newsreader",Georgia,serif;letter-spacing:-.045em}
+#intro .intro-title span{display:block;opacity:0;transform:translateY(22px);animation:introWord 1s cubic-bezier(.2,.7,.2,1) forwards}
+#intro .intro-title span:nth-child(2){animation-delay:.28s}
+#intro .intro-rule{height:1px;width:0;background:rgba(238,232,220,.7);margin:26px auto 0;animation:introLine 1s .65s ease forwards}
+@keyframes introWord{to{opacity:1;transform:translateY(0)}}
+@keyframes introFade{to{opacity:.58}}
+@keyframes introLine{to{width:92px}}
+@media(prefers-reduced-motion:reduce){#intro .intro-title span,#intro .intro-kicker,#intro .intro-rule{animation:none;opacity:1;transform:none}#intro .intro-rule{width:92px}#intro{transition:none}}
 </style>
 </head>
 <body>
+<div id="intro" role="status" aria-label="Wisdom Divine"><div class="intro-inner"><div class="intro-kicker">STILLPOINT PRESENTS</div><div class="intro-title"><span>WISDOM</span><span>DIVINE</span></div><div class="intro-rule"></div></div></div>
 <div id="home" class="v on">
   <div class="wm">Stillpoint</div>
   <button class="a" id="d1"><div class="dt">Library</div><div class="m" id="hm">No books yet</div><div class="rs" id="hr"></div></button>
@@ -539,6 +554,7 @@ $("#d3").onclick=()=>teach("students");
 if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
 if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 home();
+const intro=$("#intro");if(intro){const dismiss=()=>intro.classList.add("out");setTimeout(dismiss,2300);setTimeout(()=>intro.remove(),3300)}
 </script>
 </body>
 </html>
