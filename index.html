@@ -45,8 +45,6 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-of
 .bk .o{flex:1;text-align:left;min-width:0}.bk .t{font-family:Newsreader,Georgia,serif;font-size:21px;line-height:1.25}
 .bk .s{font-size:13px;color:var(--soft);margin-top:3px}.bk i{display:block;height:2px;background:var(--rule);margin-top:8px}.bk i b{display:block;height:100%;background:var(--acc)}
 .bk .x{font-size:13px;color:var(--soft);padding:8px 0 8px 8px}
-<<<<<<< HEAD
-=======
 .bk .cv{width:44px;height:64px;flex:none;border-radius:3px;overflow:hidden;background:var(--rule);display:flex;align-items:center;justify-content:center}
 .bk .cv img{width:100%;height:100%;object-fit:cover;display:block}
 .bk .cv span{font-size:10px;line-height:1.2;color:var(--soft);text-align:center;padding:2px}
@@ -57,7 +55,6 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-of
 #tx figure.fig .na{display:flex;align-items:center;justify-content:center;text-align:center;min-height:110px;font-family:"Hanken Grotesk",sans-serif;font-size:13px;line-height:1.45;color:var(--soft);border:1px dashed var(--rule);border-radius:6px;padding:16px 12px}
 #iv{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:25;display:none;align-items:center;justify-content:center;padding:14px}
 #iv.on{display:flex}#iv img{max-width:100%;max-height:100%;object-fit:contain}
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
 .em{padding:60px 8px;color:var(--soft);font-size:16px;line-height:1.5;max-width:30ch}
 /* reader */
 #read{background:var(--bg)}#rd{flex:1;overflow:auto;padding:70px 0 90px}
@@ -111,20 +108,12 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-of
   <button class="c3" id="d3"><span class="dt3">Teaching</span><span class="m3">Students, lessons, handouts</span></button>
 </div>
 <div id="lib" class="v">
-<<<<<<< HEAD
-  <div class="hd"><button class="lk" id="bh">Home</button><h1>Library</h1><label class="lk" style="cursor:pointer">Add books<input id="fi" type="file" accept=".txt,text/plain" multiple hidden></label></div>
-=======
-  <div class="hd"><button class="lk" id="bh">Home</button><h1>Library</h1><button class="lk" id="fi">Add books folder</button><input id="fd2" type="file" webkitdirectory multiple hidden></div>
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
+  <div class="hd"><button class="lk" id="bh">Home</button><h1>Library</h1><label class="lk" style="cursor:pointer">Add books<input id="fi" type="file" accept=".txt,text/plain" multiple hidden></label><button class="lk" id="fi">Add books folder</button><input id="fd2" type="file" webkitdirectory multiple hidden></div>
   <div style="padding:0 22px 6px"><input class="in" id="gq" type="search" placeholder="Search all books" aria-label="Search all books" enterkeyhint="search" autocomplete="off"></div>
   <div class="lkr"><button class="lk" id="ls">Study</button><button class="lk" id="lg">Glossary</button><button class="lk" id="lt">Techniques</button><button class="lk" id="lp">Practice log</button></div>
   <div id="gr" hidden></div>
   <div id="shelf"></div>
-<<<<<<< HEAD
-  <div class="ft"><button class="lk" id="lb">Back up library</button><label class="lk" style="cursor:pointer">Restore<input id="lr" type="file" accept=".json,application/json" hidden></label></div>
-=======
   <div class="ft"><button class="lk" id="lb">Back up library</button><label class="lk" style="cursor:pointer">Restore<input id="lr" type="file" accept=".json,application/json" hidden></label><button class="lk" id="frs" hidden>Rescan folder</button></div>
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
 </div>
 <div id="read" class="v">
   <div class="bar t"><button id="br">Library</button><span class="c" id="ct"></span><span class="g"><button id="bz" aria-label="Reading speed">1×</button><button id="bl">Listen</button></span></div>
@@ -136,10 +125,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-of
 <div id="cl" class="v"><div id="cb"></div><div class="ft" id="cf" style="display:none"><button class="lk" id="cbu">Back up clients</button><button class="lk" id="cbi">Biometric unlock</button><button class="lk" id="csec">Recovery and PIN</button><label class="lk" style="cursor:pointer">Restore<input id="crs" type="file" accept=".json,application/json" hidden></label></div></div>
 <div id="ex" class="v"></div>
 <div id="sh"><div id="sc"></div></div>
-<<<<<<< HEAD
-=======
 <div id="iv"><img alt=""></div>
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
 <div id="ts"></div>
 <script>
 "use strict";
@@ -154,45 +140,43 @@ function applySet(){R.style.setProperty("--fs",S.fs+"px");R.style.setProperty("-
  S.th?R.setAttribute("data-theme",S.th):R.removeAttribute("data-theme");try{localStorage.setItem("sp-set",JSON.stringify(S))}catch(e){}}
 applySet();
 /* storage */
-<<<<<<< HEAD
-const DB=(()=>{let p;const open=()=>p||(p=new Promise((res,rej)=>{const r=indexedDB.open("stillpoint-library",1);
- r.onupgradeneeded=()=>{const d=r.result;["meta","text","marks"].forEach(n=>d.createObjectStore(n,{keyPath:"id"}))};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}));
- const tx=async(s,m,f)=>{const d=await open();return new Promise((res,rej)=>{const t=d.transaction(s,m);const o=f(t);t.oncomplete=()=>res(o&&o.result);t.onerror=()=>rej(t.error)})};
- return{all:s=>tx(s,"readonly",t=>t.objectStore(s).getAll()),get:(s,k)=>tx(s,"readonly",t=>t.objectStore(s).get(k)),
- put:(s,v)=>tx(s,"readwrite",t=>{t.objectStore(s).put(v)}),del:(s,k)=>tx(s,"readwrite",t=>{t.objectStore(s).delete(k)})}})();
-=======
+/* storage */
 /* covers and figures live in their own database, so an updated app never has to
    version-upgrade the library store while another tab still holds it open */
 const mdb=(name,stores)=>{let p;const open=()=>p||(p=new Promise((res,rej)=>{const r=indexedDB.open(name,1);
  let g=setTimeout(()=>rej(new Error("storage-busy")),8000);
- r.onupgradeneeded=()=>{const d=r.result;stores.forEach(n=>{if(!d.objectStoreNames.contains(n))d.createObjectStore(n,{keyPath:"id"})})};
- r.onsuccess=()=>{clearTimeout(g);res(r.result)};r.onerror=()=>{clearTimeout(g);rej(r.error)};r.onblocked=()=>{clearTimeout(g);rej(new Error("storage-blocked"))}}));
- const tx=async(s,m,f)=>{const d=await open();return new Promise((res,rej)=>{const t=d.transaction(s,m);const o=f(t);t.oncomplete=()=>res(o&&o.result);t.onerror=()=>rej(t.error)})};
+ r.onupgradeneeded=()=>{const d=r.result;stores.forEach(n=>d.createObjectStore(n,{keyPath:"id"}));};
+ r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);r.onblocked=()=>rej(new Error("storage-blocked"));}));
+ const tx=async(s,m,f)=>{const d=await open();return new Promise((res,rej)=>{const t=d.transaction(s,m);const o=f(t);t.oncomplete=()=>res(o&&o.result);t.onerror=()=>rej(t.error)});};
  return{all:s=>tx(s,"readonly",t=>t.objectStore(s).getAll()),get:(s,k)=>tx(s,"readonly",t=>t.objectStore(s).get(k)),
- put:(s,v)=>tx(s,"readwrite",t=>{t.objectStore(s).put(v)}),del:(s,k)=>tx(s,"readwrite",t=>{t.objectStore(s).delete(k)})}};
+ put:(s,v)=>tx(s,"readwrite",t=>t.objectStore(s).put(v)),del:(s,k)=>tx(s,"readwrite",t=>t.objectStore(s).delete(k))};};
 const DB=(()=>{const main=mdb("stillpoint-library",["meta","text","marks"]),extra=mdb("stillpoint-assets",["blob","kv"]),pick=s=>s==="blob"||s==="kv"?extra:main;
- return{all:s=>pick(s).all(s),get:(s,k)=>pick(s).get(s,k),put:(s,v)=>pick(s).put(s,v),del:(s,k)=>pick(s).del(s,k)}})();
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
+ return{all:s=>pick(s).all(s),get:(s,k)=>pick(s).get(k),put:(s,v)=>pick(s).put(s,v),del:(s,k)=>pick(s).del(s,k)};})();
+
 /* import: clean PDF-converted text, then split into chapters */
 function clean(raw){
- const L=raw.replace(/\r/g,"").replace(/\f/g,"\n\n").split("\n").map(l=>l.trim()),f={};
- L.forEach(l=>{if(l)f[l]=(f[l]||0)+1});
+ const L=raw.replace(/
+/g,"").replace(//g,"
+
+").split("
+").map(l=>l.trim()),f={};
+ L.forEach(l=>f[l]=(f[l]||0)+1);
  const K=L.filter(l=>!(l&&(/^(page\s*)?\d{1,4}$/i.test(l)||(f[l]>=6&&l.length<70))));
  const lens=K.filter(Boolean).map(l=>l.length).sort((a,b)=>a-b),mx=lens[Math.floor(lens.length*.9)]||80,P=[];let c="";
  for(const l of K){
   if(!l){if(c)P.push(c);c="";continue}
   if(!c){c=l;continue}
   if(/[a-z]-$/.test(c)&&/^[a-z]/.test(l))c=c.slice(0,-1)+l;
-  else if(/[.!?”"')]$/.test(c)&&c.length<mx*.75&&/^[A-Z“"‘]/.test(l)){P.push(c);c=l}
+  else if(/[.!?””')]$/.test(c)&&c.length<mx*.75&&/^[A-Z“”‘]/.test(l)){P.push(c);c=l}
   else c+=" "+l}
  if(c)P.push(c);return P}
-const isH=p=>p.length<80&&(/^(chapter|part|section)\s+([0-9ivxlc]+|[a-z]+)\b/i.test(p)||/^\d{1,2}[.)]\s+[A-Z]/.test(p)||(p.length>3&&p===p.toUpperCase()&&/[A-Z]{3}/.test(p)&&!/[.!?]$/.test(p)));
+const isH=p=>p.length<80&&(/^(chapter|part|section)\s+([0-9ivxlc]+|[a-z]+)/i.test(p)||/^\d{1,2}[.)]\s+[A-Z]/.test(p)||(p.length>3&&p===p.toUpperCase()&&/[A-Z]{3}/.test(p)&&!/[.!?]$/.test(p)));
 function chapters(P){const C=[];let cur=null;
  for(const p of P){if(isH(p)){cur={t:p.replace(/\s+/g," "),p:[]};C.push(cur)}else{if(!cur){cur={t:"Beginning",p:[]};C.push(cur)}cur.p.push(p)}}
  const good=C.filter(c=>c.p.length);
  if(good.length<2){const out=[];for(let i=0;i<P.length;i+=40)out.push({t:"Part "+(out.length+1),p:P.slice(i,i+40)});return out}
  return good}
-<<<<<<< HEAD
+
 async function importFiles(files){let n=0;
  for(const f of files){toast("Importing "+(n+1)+" of "+files.length+"…");
   try{const P=clean(await f.text()),C=chapters(P),id="b"+Date.now()+Math.random().toString(36).slice(2,6);
@@ -216,12 +200,11 @@ async function importRootBooks(){
   toast("Books loaded from the root folder.");
   await home();
   shelf();
- }catch(e){} }
-=======
+}catch(e){} }
 /* library books: folders in the converter's sidecar format
-   <book>/book.json + <book>/<text>.txt + <book>/assets/*
-   book.json lists assets (id, file, width, height, caption) and markers (id, offset);
-   the text itself carries [[img:id]] needles where a figure belongs. */
+<book>/book.json + <book>/<text>.txt + <book>/assets/*
+book.json lists assets (id, file, width, height, caption) and markers (id, offset);
+the text itself carries [[img:id]] needles where a figure belongs. */
 const NEEDLE=/\u0001([^\u0001]+)\u0001/g,RAWNEEDLE=/\[\[img:([A-Za-z0-9_.-]+)\]\]/g;
 const urls=new Map(),getUrl=(k,b)=>{let u=urls.get(k);if(!u){u=URL.createObjectURL(b);urls.set(k,u)}return u};
 let IO=null;
@@ -302,19 +285,17 @@ const dirPerm=async h=>{try{if(!h.queryPermission)return true;if(await h.queryPe
 /* views */
 const show=v=>{document.querySelectorAll(".v").forEach(e=>e.classList.toggle("on",e.id===v));R.classList.toggle("cn",v==="cl");if(v!=="cl")lockCl();if(v==="home")home()};
 $("#d1").onclick=()=>{show("lib");shelf()};$("#bh").onclick=()=>show("home");
-$("#d2").onclick=()=>{V={m:"list"};show("cl");cl()};
-<<<<<<< HEAD
 $("#fi").onchange=e=>{importFiles([...e.target.files]);e.target.value=""};
 async function home(){
  try{if(!(await DB.all("meta")).length){await importRootBooks();}
   const M=await DB.all("meta"),pr=M.filter(m=>m.pr>0&&m.pr<100);
   $("#hm").textContent=M.length?M.length+(M.length>1?" books":" book")+(pr.length?", "+pr.length+" in progress":""):"No books yet";
   const l=M.filter(m=>m.at).sort((a,b)=>b.at-a.at)[0];
-  $("#hr").innerHTML=l?"<b>Continue</b> "+esc(l.title)+'<i><b style="width:'+l.pr+'%"></b></i>':""}catch(e){$("#hm").textContent="Storage unavailable"}}
+  $("#hr").innerHTML=l?"<b>Continue</b> "+esc(l.title)+"<i><b style=\"width:"+l.pr+"%\"></b></i>":""}catch(e){$("#hm").textContent="Storage unavailable"}}
 async function shelf(){let M=[];try{M=await DB.all("meta")}catch(e){}
  M.sort((a,b)=>(b.at||b.added)-(a.at||a.added));const el=$("#shelf");
  if(!M.length){el.innerHTML='<div class="em">Add your first book. Choose one or more .txt files and Stillpoint will tidy them and find the chapters.</div>';return}
- el.innerHTML=M.map(m=>'<div class="bk"><button class="o" data-o="'+m.id+'"><div class="t">'+esc(m.title)+'</div><div class="s">'+m.n+" chapters, "+m.pr+'% read</div><i><b style="width:'+m.pr+'%"></b></i></button><button class="x" data-x="'+m.id+'">Remove</button></div>').join("");
+ el.innerHTML=M.map(m=>'<div class="bk"><button class="o" data-o="'+m.id+'"><div class="t">'+esc(m.title)+'</div><div class="s">'+m.n+" chapters, "+m.pr+'% read</div><i><b style=\"width:"+m.pr+"%\"></b></i></button><button class="x" data-x="'+m.id+'">Remove</button></div>').join("");
  el.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>openBook(b.dataset.o));
  el.querySelectorAll("[data-x]").forEach(b=>b.onclick=async()=>{if(!confirm("Remove this book and its highlights?"))return;
   const id=b.dataset.x;await DB.del("meta",id);await DB.del("text",id);for(const k of (await DB.all("marks")).filter(k=>k.b===id))await DB.del("marks",k.id);shelf()})}
@@ -327,7 +308,9 @@ function para(p,i,pi){const ms=B.k.filter(k=>k.ch===i&&k.pi===pi).sort((a,b)=>a.
 function render(y){const c=B.c[B.i];
  $("#tx").innerHTML="<h2>"+esc(c.t)+"</h2>"+c.p.map((p,pi)=>'<p data-p="'+pi+'">'+para(p,B.i,pi)+"</p>").join("")+
   '<div class="nv"><button data-n="-1"'+(B.i?"":" hidden")+'>Previous chapter</button><button data-n="1"'+(B.i<B.c.length-1?"":" hidden")+">Next chapter</button></div>";
- $("#ct").textContent=c.t;$("#tx").querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{B.i+=+b.dataset.n;render(0)});
+ $("#ct").textContent=c.t;$("#tx").querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{$V={m:"list"};B.i+=+b.dataset.n;render(0)});
+ $("#tx").querySelectorAll("mark").forEach(m=>m.onclick=async e=>{e.stopPropagation();if(!confirm("Remove this highlight?"))return;await DB.del("marks",m.dataset.k);B.k=B.k.filter(k=>k.id!==m.dataset.k);render(rd.scrollTop/(rd.scrollHeight-rd.clientHeight||1))});
+ const rd=$("#rd");requestAnimationFrame(()=>{rd.scrollTop=y*(rd.scrollHeight-rd.clientHeight);prog()})}
  $("#tx").querySelectorAll("mark").forEach(m=>m.onclick=async e=>{e.stopPropagation();if(!confirm("Remove this highlight?"))return;await DB.del("marks",m.dataset.k);B.k=B.k.filter(k=>k.id!==m.dataset.k);render(rd.scrollTop/(rd.scrollHeight-rd.clientHeight||1))});
  const rd=$("#rd");requestAnimationFrame(()=>{rd.scrollTop=y*(rd.scrollHeight-rd.clientHeight);prog()})}
 =======
@@ -386,7 +369,6 @@ function render(y){const c=B.c[B.i];
  $("#ct").textContent=c.t;$("#tx").querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{B.i+=+b.dataset.n;render(0)});
  $("#tx").querySelectorAll("mark").forEach(m=>m.onclick=async e=>{e.stopPropagation();if(!confirm("Remove this highlight?"))return;await DB.del("marks",m.dataset.k);B.k=B.k.filter(k=>k.id!==m.dataset.k);render(rd.scrollTop/(rd.scrollHeight-rd.clientHeight||1))});
  const rd=$("#rd");requestAnimationFrame(()=>{rd.scrollTop=y*(rd.scrollHeight-rd.clientHeight);prog();hydrate()})}
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
 let sv;const rd=$("#rd");
 function prog(){if(!B)return;const f=rd.scrollTop/(rd.scrollHeight-rd.clientHeight||1),p=Math.min(100,Math.round((B.i+f)/B.c.length*100));
  $("#pg").style.width=p+"%";clearTimeout(sv);const bk=B;sv=setTimeout(()=>{if(!bk)return;Object.assign(bk.m,{i:bk.i,y:f,pr:p,at:Date.now()});DB.put("meta",bk.m).catch(()=>{})},400)}
@@ -475,13 +457,6 @@ function sessView(){const c=CL.find(x=>x.id===V.id),o=SE.find(x=>x.id===V.sid)||
 /* backups: plain files you keep; client backups stay encrypted with your PIN */
 async function saveFile(name,data){try{const b=data instanceof Blob?data:new Blob([data],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);toast("Saved to your downloads.")}catch(e){toast("Could not save the file.")}}
 const stamp=()=>new Date().toLocaleDateString("en-CA");
-<<<<<<< HEAD
-$("#lb").onclick=async()=>{try{toast("Preparing backup…");const[meta,text,marks]=await Promise.all([DB.all("meta"),DB.all("text"),DB.all("marks")]);
- saveFile("stillpoint-library-"+stamp()+".json",new Blob([JSON.stringify({app:"stillpoint",kind:"library",v:1,meta,text,marks})],{type:"application/json"}))}catch(e){toast("Could not read the library.")}};
-$("#lr").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
- try{const j=JSON.parse(await f.text());if(j.app!=="stillpoint"||j.kind!=="library")throw 0;toast("Restoring…");
-  for(const s of["meta","text","marks"])for(const r of j[s])await DB.put(s,r);toast("Library restored.");shelf()}catch(x){toast("That is not a Stillpoint library backup.")}};
-=======
 const b64Of=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(",")[1]||"");r.onerror=()=>rej(r.error);r.readAsDataURL(b)});
 const fromB64=(d,t)=>{const s=atob(d),a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);return new Blob([a],{type:t||"application/octet-stream"})};
 $("#lb").onclick=async()=>{try{toast("Preparing backup…");const[meta,text,marks,bl]=await Promise.all([DB.all("meta"),DB.all("text"),DB.all("marks"),DB.all("blob")]);
@@ -495,9 +470,6 @@ $("#lr").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)re
   for(const s of["meta","text","marks"])for(const r of (j[s]||[]))await DB.put(s,r);
   for(const b of (j.blobs||[]))if(b&&b.id&&b.data)await DB.put("blob",{id:b.id,blob:fromB64(b.data,b.type)});
   toast("Library restored.");shelf()}catch(x){toast("That is not a Stillpoint library backup.")}};
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
-$("#cbu").onclick=async()=>{try{const[cfg,rec]=await Promise.all([CD.get("cfg","cfg"),CD.all("rec")]);saveFile("stillpoint-clients-"+stamp()+".json",JSON.stringify({app:"stillpoint",kind:"clients",v:1,cfg,rec}))}catch(e){toast("Could not read the clients.")}};
-$("#crs").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
  try{const j=JSON.parse(await f.text());if(j.app!=="stillpoint"||j.kind!=="clients"||!j.cfg)throw 0;
   if(!confirm("Restoring replaces all clients on this device with the backup. Continue?"))return;
   for(const r of await CD.all("rec"))await CD.del("rec",r.id);await CD.put("cfg",j.cfg);for(const r of j.rec)await CD.put("rec",r);
