@@ -45,19 +45,11 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-of
 .bk .o{flex:1;text-align:left;min-width:0}.bk .t{font-family:Newsreader,Georgia,serif;font-size:21px;line-height:1.25}
 .bk .s{font-size:13px;color:var(--soft);margin-top:3px}.bk i{display:block;height:2px;background:var(--rule);margin-top:8px}.bk i b{display:block;height:100%;background:var(--acc)}
 .bk .x{font-size:13px;color:var(--soft);padding:8px 0 8px 8px}
-<<<<<<< HEAD
-=======
-.bk .cv{width:44px;height:64px;flex:none;border-radius:3px;overflow:hidden;background:var(--rule);display:flex;align-items:center;justify-content:center}
+.bk .cv{width:76px;height:108px;flex:none;border-radius:3px;overflow:hidden;background:var(--rule);box-shadow:2px 3px 8px rgba(0,0,0,.13)}
 .bk .cv img{width:100%;height:100%;object-fit:cover;display:block}
-.bk .cv span{font-size:10px;line-height:1.2;color:var(--soft);text-align:center;padding:2px}
-#tx figure.fig{position:relative;margin:1.8em 0;min-height:110px}
-#tx figure.fig .ph{position:absolute;inset:0;background:var(--rule);border-radius:4px}
-#tx figure.fig img{display:block;width:100%;height:auto;border-radius:4px;background:var(--rule)}
-#tx figure.fig figcaption{font-family:"Hanken Grotesk",sans-serif;font-size:13px;line-height:1.45;color:var(--soft);padding:8px 2px 0;text-indent:0;text-align:center}
-#tx figure.fig .na{display:flex;align-items:center;justify-content:center;text-align:center;min-height:110px;font-family:"Hanken Grotesk",sans-serif;font-size:13px;line-height:1.45;color:var(--soft);border:1px dashed var(--rule);border-radius:6px;padding:16px 12px}
-#iv{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:25;display:none;align-items:center;justify-content:center;padding:14px}
-#iv.on{display:flex}#iv img{max-width:100%;max-height:100%;object-fit:contain}
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
+.shelf-tools{display:flex;gap:10px;overflow:auto;padding:4px 22px 10px;white-space:nowrap}
+.shelf-tools button{font-size:13px;color:var(--soft);padding:7px 11px;border:1px solid var(--rule);border-radius:20px}
+.shelf-tools button.on{background:var(--acc);color:var(--bg);border-color:var(--acc)}
 .em{padding:60px 8px;color:var(--soft);font-size:16px;line-height:1.5;max-width:30ch}
 /* reader */
 #read{background:var(--bg)}#rd{flex:1;overflow:auto;padding:70px 0 90px}
@@ -107,24 +99,16 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-of
 <div id="home" class="v on">
   <div class="wm">Stillpoint</div>
   <button class="a" id="d1"><div class="dt">Library</div><div class="m" id="hm">No books yet</div><div class="rs" id="hr"></div></button>
-  <button class="b" id="d2"><div class="dt">Clients</div><div class="m" style="color:var(--nm)">Locked with a PIN</div></button>
-  <button class="c3" id="d3"><span class="dt3">Teaching</span><span class="m3">Students, lessons, handouts</span></button>
+
+
 </div>
 <div id="lib" class="v">
-<<<<<<< HEAD
   <div class="hd"><button class="lk" id="bh">Home</button><h1>Library</h1><label class="lk" style="cursor:pointer">Add books<input id="fi" type="file" accept=".txt,text/plain" multiple hidden></label></div>
-=======
-  <div class="hd"><button class="lk" id="bh">Home</button><h1>Library</h1><button class="lk" id="fi">Add books folder</button><input id="fd2" type="file" webkitdirectory multiple hidden></div>
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
   <div style="padding:0 22px 6px"><input class="in" id="gq" type="search" placeholder="Search all books" aria-label="Search all books" enterkeyhint="search" autocomplete="off"></div>
-  <div class="lkr"><button class="lk" id="ls">Study</button><button class="lk" id="lg">Glossary</button><button class="lk" id="lt">Techniques</button><button class="lk" id="lp">Practice log</button></div>
+  <div class="shelf-tools" id="shelfFilters"><button class="on" data-filter="all">All books</button><button data-filter="reading">Currently reading</button><button data-filter="want">Want to read</button><button data-filter="finished">Finished</button></div><div class="lkr"><button class="lk" id="ls">Study</button><button class="lk" id="lg">Glossary</button><button class="lk" id="lt">Techniques</button><button class="lk" id="lp">Practice log</button></div>
   <div id="gr" hidden></div>
   <div id="shelf"></div>
-<<<<<<< HEAD
   <div class="ft"><button class="lk" id="lb">Back up library</button><label class="lk" style="cursor:pointer">Restore<input id="lr" type="file" accept=".json,application/json" hidden></label></div>
-=======
-  <div class="ft"><button class="lk" id="lb">Back up library</button><label class="lk" style="cursor:pointer">Restore<input id="lr" type="file" accept=".json,application/json" hidden></label><button class="lk" id="frs" hidden>Rescan folder</button></div>
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
 </div>
 <div id="read" class="v">
   <div class="bar t"><button id="br">Library</button><span class="c" id="ct"></span><span class="g"><button id="bz" aria-label="Reading speed">1×</button><button id="bl">Listen</button></span></div>
@@ -133,13 +117,9 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-of
   <button id="hb">Highlight</button>
   <div class="bar u"><button id="bc">Contents</button><button id="bs">Search</button><button id="bn">Notes</button><button id="bk">Marks</button><button id="ba">Aa</button></div>
 </div>
-<div id="cl" class="v"><div id="cb"></div><div class="ft" id="cf" style="display:none"><button class="lk" id="cbu">Back up clients</button><button class="lk" id="cbi">Biometric unlock</button><button class="lk" id="csec">Recovery and PIN</button><label class="lk" style="cursor:pointer">Restore<input id="crs" type="file" accept=".json,application/json" hidden></label></div></div>
+
 <div id="ex" class="v"></div>
 <div id="sh"><div id="sc"></div></div>
-<<<<<<< HEAD
-=======
-<div id="iv"><img alt=""></div>
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
 <div id="ts"></div>
 <script>
 "use strict";
@@ -154,25 +134,11 @@ function applySet(){R.style.setProperty("--fs",S.fs+"px");R.style.setProperty("-
  S.th?R.setAttribute("data-theme",S.th):R.removeAttribute("data-theme");try{localStorage.setItem("sp-set",JSON.stringify(S))}catch(e){}}
 applySet();
 /* storage */
-<<<<<<< HEAD
 const DB=(()=>{let p;const open=()=>p||(p=new Promise((res,rej)=>{const r=indexedDB.open("stillpoint-library",1);
  r.onupgradeneeded=()=>{const d=r.result;["meta","text","marks"].forEach(n=>d.createObjectStore(n,{keyPath:"id"}))};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}));
  const tx=async(s,m,f)=>{const d=await open();return new Promise((res,rej)=>{const t=d.transaction(s,m);const o=f(t);t.oncomplete=()=>res(o&&o.result);t.onerror=()=>rej(t.error)})};
  return{all:s=>tx(s,"readonly",t=>t.objectStore(s).getAll()),get:(s,k)=>tx(s,"readonly",t=>t.objectStore(s).get(k)),
  put:(s,v)=>tx(s,"readwrite",t=>{t.objectStore(s).put(v)}),del:(s,k)=>tx(s,"readwrite",t=>{t.objectStore(s).delete(k)})}})();
-=======
-/* covers and figures live in their own database, so an updated app never has to
-   version-upgrade the library store while another tab still holds it open */
-const mdb=(name,stores)=>{let p;const open=()=>p||(p=new Promise((res,rej)=>{const r=indexedDB.open(name,1);
- let g=setTimeout(()=>rej(new Error("storage-busy")),8000);
- r.onupgradeneeded=()=>{const d=r.result;stores.forEach(n=>{if(!d.objectStoreNames.contains(n))d.createObjectStore(n,{keyPath:"id"})})};
- r.onsuccess=()=>{clearTimeout(g);res(r.result)};r.onerror=()=>{clearTimeout(g);rej(r.error)};r.onblocked=()=>{clearTimeout(g);rej(new Error("storage-blocked"))}}));
- const tx=async(s,m,f)=>{const d=await open();return new Promise((res,rej)=>{const t=d.transaction(s,m);const o=f(t);t.oncomplete=()=>res(o&&o.result);t.onerror=()=>rej(t.error)})};
- return{all:s=>tx(s,"readonly",t=>t.objectStore(s).getAll()),get:(s,k)=>tx(s,"readonly",t=>t.objectStore(s).get(k)),
- put:(s,v)=>tx(s,"readwrite",t=>{t.objectStore(s).put(v)}),del:(s,k)=>tx(s,"readwrite",t=>{t.objectStore(s).delete(k)})}};
-const DB=(()=>{const main=mdb("stillpoint-library",["meta","text","marks"]),extra=mdb("stillpoint-assets",["blob","kv"]),pick=s=>s==="blob"||s==="kv"?extra:main;
- return{all:s=>pick(s).all(s),get:(s,k)=>pick(s).get(s,k),put:(s,v)=>pick(s).put(s,v),del:(s,k)=>pick(s).del(s,k)}})();
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
 /* import: clean PDF-converted text, then split into chapters */
 function clean(raw){
  const L=raw.replace(/\r/g,"").replace(/\f/g,"\n\n").split("\n").map(l=>l.trim()),f={};
@@ -192,12 +158,23 @@ function chapters(P){const C=[];let cur=null;
  const good=C.filter(c=>c.p.length);
  if(good.length<2){const out=[];for(let i=0;i<P.length;i+=40)out.push({t:"Part "+(out.length+1),p:P.slice(i,i+40)});return out}
  return good}
-<<<<<<< HEAD
+function coverData(title,author,id){
+ const palettes=[["#203b57","#f1e9dc"],["#7b3f43","#f5e9d7"],["#45584c","#e8e6d8"],["#b18a52","#1d2630"],["#5a526f","#f0e8dc"],["#314f58","#f2e9d8"]];
+ let h=0;for(const ch of id)h=(h*31+ch.charCodeAt(0))>>>0;const [bg,fg]=palettes[h%palettes.length];
+ const words=String(title||"Untitled").split(/\s+/),lines=[];let line="";
+ for(const w of words){if((line+" "+w).trim().length>17&&line){lines.push(line);line=w}else line=(line+" "+w).trim()}if(line)lines.push(line);
+ const escXml=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+ const titleSvg=lines.slice(0,5).map((v,i)=>'<text x="28" y="'+(185+i*34)+'" font-family="Georgia,serif" font-size="26" font-style="italic" fill="'+fg+'">'+escXml(v)+'</text>').join("");
+ const svg='<svg xmlns="http://www.w3.org/2000/svg" width="360" height="510" viewBox="0 0 360 510"><rect width="360" height="510" fill="'+bg+'"/><rect x="15" y="15" width="330" height="480" fill="none" stroke="'+fg+'" stroke-opacity=".55"/><text x="28" y="70" font-family="Arial,sans-serif" font-size="13" letter-spacing="3" fill="'+fg+'">STILLPOINT / LIBRARY</text><path d="M28 112H332" stroke="'+fg+'" stroke-opacity=".6"/>'+titleSvg+'<text x="28" y="438" font-family="Arial,sans-serif" font-size="14" letter-spacing="2" fill="'+fg+'">'+escXml(author||"A READING EDITION").slice(0,34)+'</text><path d="M28 460H332" stroke="'+fg+'" stroke-opacity=".6"/></svg>';
+ return "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)
+}
+let activeFilter="all";
+$("#shelfFilters").querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{activeFilter=b.dataset.filter;$("#shelfFilters").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));shelf()});
 async function importFiles(files){let n=0;
  for(const f of files){toast("Importing "+(n+1)+" of "+files.length+"…");
   try{const P=clean(await f.text()),C=chapters(P),id="b"+Date.now()+Math.random().toString(36).slice(2,6);
    const title=f.name.replace(/\.txt$/i,"").replace(/[_]+/g," ").trim();
-   await DB.put("text",{id,ch:C,source:(f&&f.name)||null});await DB.put("meta",{id,title,n:C.length,added:Date.now(),at:0,i:0,y:0,pr:0,source:(f&&f.name)||null});n++}
+   await DB.put("text",{id,ch:C,source:(f&&f.name)||null});await DB.put("meta",{id,title,n:C.length,added:Date.now(),at:0,i:0,y:0,pr:0,status:"want",source:(f&&f.name)||null});n++}
   catch(e){toast("Could not import "+f.name)}}
  if(n)toast("Added "+n+(n>1?" books.":" book."));shelf()}
 async function importRootBooks(){
@@ -217,93 +194,10 @@ async function importRootBooks(){
   await home();
   shelf();
  }catch(e){} }
-=======
-/* library books: folders in the converter's sidecar format
-   <book>/book.json + <book>/<text>.txt + <book>/assets/*
-   book.json lists assets (id, file, width, height, caption) and markers (id, offset);
-   the text itself carries [[img:id]] needles where a figure belongs. */
-const NEEDLE=/\u0001([^\u0001]+)\u0001/g,RAWNEEDLE=/\[\[img:([A-Za-z0-9_.-]+)\]\]/g;
-const urls=new Map(),getUrl=(k,b)=>{let u=urls.get(k);if(!u){u=URL.createObjectURL(b);urls.set(k,u)}return u};
-let IO=null;
-function stripHead(raw,title){
- const L=raw.replace(/\r/g,"").split("\n");let i=0;while(i<L.length&&!L[i].trim())i++;
- if(i>=L.length)return raw;
- const t=L[i].trim().toLowerCase(),ti=String(title||"").trim().toLowerCase();
- if(!t||!ti||!(t===ti||ti.indexOf(t.slice(0,20))===0))return raw;
- let d=-1;for(let j=i;j<Math.min(L.length,i+8);j++)if(L[j].trim()==="---"){d=j;break}
- return d>-1?L.slice(d+1).join("\n"):raw}
-function figRef(id,A){const a=A[id]||{};return {pi:0,id,caption:a.caption||"",width:a.width||0,height:a.height||0}}
-function splitImgs(raw,A){
- const P=clean(raw.replace(RAWNEEDLE,"\n\n\u0001$1\u0001\n\n")),C=chapters(P);
- for(const c of C){const imgs=[],keep=[];
-  for(const p of c.p){const toks=[...p.matchAll(NEEDLE)].map(m=>m[1]),txt=p.replace(NEEDLE,"").replace(RAWNEEDLE,"").trim();
-   if(toks.length){for(const id of toks)imgs.push({...figRef(id,A),pi:keep.length});if(!txt)continue}
-   keep.push(txt)}
-  c.p=keep;c.imgs=imgs}
- return C}
-async function thumbOf(f){try{const b=await createImageBitmap(f),s=Math.min(1,300/Math.max(b.width,b.height)),c=document.createElement("canvas");
- c.width=Math.max(1,Math.round(b.width*s));c.height=Math.max(1,Math.round(b.height*s));c.getContext("2d").drawImage(b,0,0,c.width,c.height);if(b.close)b.close();
- return await new Promise(r=>c.toBlob(r,"image/jpeg",.82))}catch(e){return null}}
-async function ingestBook(name,src){
- let js;try{js=JSON.parse(await (await src.read("book.json")).text())}catch(e){return false}
- const names=await src.list().catch(()=>[]);let tp=null;
- for(const c of [js.text_file,"content.txt",(name||"")+".txt"])if(c&&names.indexOf(c)>-1){tp=c;break}
- if(!tp)tp=names.find(n=>/\.txt$/i.test(n))||null;
- if(!tp)return false;
- let raw;try{raw=await (await src.read(tp)).text()}catch(e){return false}
- const title=String(js.title||name||"Untitled").trim()||"Untitled",author=String(js.author||"").trim();
- const A={};(js.assets||[]).forEach(a=>{if(a&&a.id)A[a.id]=a});
- const C=splitImgs(stripHead(raw,title),A);
- if(!C.length)return false;
- if(!C.some(c=>c.imgs.length)&&Array.isArray(js.markers)){
-  const len=Math.max(1,raw.length);
-  for(const m of js.markers){if(!m||m.type!=="image"||!m.id||!A[m.id])continue;
-   const ci=Math.min(C.length-1,Math.floor((m.offset||0)/len*C.length)),c=C[ci];if(!c)continue;
-   c.imgs.push({pi:Math.max(0,c.p.length-1),id:m.id,caption:A[m.id].caption||"",width:A[m.id].width||0,height:A[m.id].height||0})}}
- const id="b"+Date.now()+Math.random().toString(36).slice(2,6);let n=0;
- for(const aid in A){try{const f=await src.read(A[aid].file||("assets/"+aid));await DB.put("blob",{id:id+"/"+aid,blob:f});n++}catch(e){}}
- let cover=0;
- if(js.cover){try{const f=await src.read(js.cover);await DB.put("blob",{id:id+"/cover",blob:f});const t=await thumbOf(f);if(t)await DB.put("blob",{id:id+"/thumb",blob:t});cover=1}catch(e){}}
- await DB.put("text",{id,ch:C});
- await DB.put("meta",{id,title,author,dir:name||"",fmt:"sp",n:C.length,added:Date.now(),at:0,i:0,y:0,pr:0,cover,assetsN:n});
- return true}
-async function ingestRoot(root){
- const dirs=[];
- const walk=async(d,depth)=>{const es=[];try{for await(const [n,h] of d.entries())es.push([n,h])}catch(e){return}
-  if(es.some(([n,h])=>h.kind==="file"&&n==="book.json")){dirs.push(d);return}
-  if(depth<2)for(const [n,h] of es)if(h.kind==="directory"&&n[0]!==".")await walk(h,depth+1)};
- await walk(root,0);
- if(!dirs.length)return toast("No books found. Each book needs its own folder with book.json.");
- const have=new Set((await DB.all("meta").catch(()=>[])).map(m=>m.dir).filter(Boolean));
- let ok=0,skip=0,n=0;
- for(const d of dirs){if(have.has(d.name)){skip++;continue}
-  const src={read:async p=>{const ps=p.split("/");let x=d;for(const q of ps.slice(0,-1))x=await x.getDirectoryHandle(q);return (await x.getFileHandle(ps[ps.length-1])).getFile()},
-   list:async()=>{const o=[];for await(const [nm] of d.entries())o.push(nm);return o}};
-  n++;toast("Importing "+n+" of "+(dirs.length-skip)+"…");
-  try{if(await ingestBook(d.name,src))ok++}catch(e){}}
- toast(ok?"Added "+ok+(ok>1?" books.":" book.")+(skip?" "+skip+" already in your library.":""):(skip?"Those books are already in your library.":"Could not read those books."));shelf()}
-async function ingestFiles(list){
- const all=list.map(f=>({p:String(f.webkitRelativePath||f.name).split("/"),f}));
- const roots=new Set();
- for(const {p} of all)if(p[p.length-1]==="book.json")roots.add(p.slice(0,-1).join("/"));
- const have=new Set((await DB.all("meta").catch(()=>[])).map(m=>m.dir).filter(Boolean));
- let ok=0,skip=0,n=0;
- for(const D of roots){
-  const pre=D?D+"/":"",files=new Map();
-  for(const {p,f} of all){const s=p.join("/");if(s.indexOf(pre)===0)files.set(s.slice(pre.length),f)}
-  const name=D.split("/").pop()||"Untitled";
-  if(have.has(name)){skip++;continue}
-  const src={read:async p=>{const f=files.get(p);if(!f)throw new Error("missing "+p);return f},list:async()=>[...files.keys()]};
-  n++;toast("Importing "+n+"…");
-  try{if(await ingestBook(name,src))ok++}catch(e){}}
- toast(ok?"Added "+ok+(ok>1?" books.":" book.")+(skip?" "+skip+" already in your library.":""):(skip?"Those books are already in your library.":"No books found. Each book needs its own folder with book.json."));shelf()}
-const dirPerm=async h=>{try{if(!h.queryPermission)return true;if(await h.queryPermission({mode:"read"})==="granted")return true;return await h.requestPermission({mode:"read"})==="granted"}catch(e){return false}};
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
 /* views */
 const show=v=>{document.querySelectorAll(".v").forEach(e=>e.classList.toggle("on",e.id===v));R.classList.toggle("cn",v==="cl");if(v!=="cl")lockCl();if(v==="home")home()};
 $("#d1").onclick=()=>{show("lib");shelf()};$("#bh").onclick=()=>show("home");
-$("#d2").onclick=()=>{V={m:"list"};show("cl");cl()};
-<<<<<<< HEAD
+
 $("#fi").onchange=e=>{importFiles([...e.target.files]);e.target.value=""};
 async function home(){
  try{if(!(await DB.all("meta")).length){await importRootBooks();}
@@ -312,10 +206,10 @@ async function home(){
   const l=M.filter(m=>m.at).sort((a,b)=>b.at-a.at)[0];
   $("#hr").innerHTML=l?"<b>Continue</b> "+esc(l.title)+'<i><b style="width:'+l.pr+'%"></b></i>':""}catch(e){$("#hm").textContent="Storage unavailable"}}
 async function shelf(){let M=[];try{M=await DB.all("meta")}catch(e){}
- M.sort((a,b)=>(b.at||b.added)-(a.at||a.added));const el=$("#shelf");
+ M.sort((a,b)=>(b.at||b.added)-(a.at||a.added));if(activeFilter!=="all")M=M.filter(m=>(m.status||"want")===activeFilter);const el=$("#shelf");
  if(!M.length){el.innerHTML='<div class="em">Add your first book. Choose one or more .txt files and Stillpoint will tidy them and find the chapters.</div>';return}
- el.innerHTML=M.map(m=>'<div class="bk"><button class="o" data-o="'+m.id+'"><div class="t">'+esc(m.title)+'</div><div class="s">'+m.n+" chapters, "+m.pr+'% read</div><i><b style="width:'+m.pr+'%"></b></i></button><button class="x" data-x="'+m.id+'">Remove</button></div>').join("");
- el.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>openBook(b.dataset.o));
+ el.innerHTML=M.map(m=>'<div class="bk"><div class="cv"><img alt="Book cover" src="'+coverData(m.title,m.author,m.id)+'"></div><button class="o" data-o="'+m.id+'"><div class="t">'+esc(m.title)+'</div><div class="s">'+m.n+" chapters · "+m.pr+'% read</div><i><b style="width:'+m.pr+'%"></b></i></button><button class="x" data-status="'+m.id+'">'+({want:"Want to read",reading:"Currently reading",finished:"Finished"}[m.status||"want"])+'</button><button class="x" data-x="'+m.id+'">Remove</button></div>').join("");
+ el.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>openBook(b.dataset.o));\n el.querySelectorAll("[data-status]").forEach(b=>b.onclick=async()=>{const m=await DB.get("meta",b.dataset.status);const opts=["want","reading","finished"];m.status=opts[(opts.indexOf(m.status||"want")+1)%opts.length];await DB.put("meta",m);shelf()});
  el.querySelectorAll("[data-x]").forEach(b=>b.onclick=async()=>{if(!confirm("Remove this book and its highlights?"))return;
   const id=b.dataset.x;await DB.del("meta",id);await DB.del("text",id);for(const k of (await DB.all("marks")).filter(k=>k.b===id))await DB.del("marks",k.id);shelf()})}
 /* reader */
@@ -330,63 +224,6 @@ function render(y){const c=B.c[B.i];
  $("#ct").textContent=c.t;$("#tx").querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{B.i+=+b.dataset.n;render(0)});
  $("#tx").querySelectorAll("mark").forEach(m=>m.onclick=async e=>{e.stopPropagation();if(!confirm("Remove this highlight?"))return;await DB.del("marks",m.dataset.k);B.k=B.k.filter(k=>k.id!==m.dataset.k);render(rd.scrollTop/(rd.scrollHeight-rd.clientHeight||1))});
  const rd=$("#rd");requestAnimationFrame(()=>{rd.scrollTop=y*(rd.scrollHeight-rd.clientHeight);prog()})}
-=======
-$("#fi").onclick=async()=>{
- if(window.showDirectoryPicker){try{const h=await showDirectoryPicker({mode:"read"});await DB.put("kv",{id:"dir",handle:h});$("#frs").hidden=false;return ingestRoot(h)}catch(e){if(e&&e.name==="AbortError")return}}
- $("#fd2").click()};
-$("#fd2").onchange=e=>{const f=[...e.target.files];e.target.value="";ingestFiles(f)};
-$("#frs").onclick=async()=>{const r=await DB.get("kv","dir").catch(()=>null);
- if(!r||!r.handle)return toast("No folder saved. Use Add books folder first.");
- if(!await dirPerm(r.handle))return toast("Allow access to that folder to rescan.");
- ingestRoot(r.handle)};
-DB.get("kv","dir").then(r=>{if(r&&r.handle)$("#frs").hidden=false}).catch(()=>{});
-$("#iv").onclick=()=>{const iv=$("#iv");iv.classList.remove("on");iv.querySelector("img").removeAttribute("src")};
-async function home(){try{const M=await DB.all("meta"),pr=M.filter(m=>m.pr>0&&m.pr<100);
- $("#hm").textContent=M.length?M.length+(M.length>1?" books":" book")+(pr.length?", "+pr.length+" in progress":""):"No books yet";
- const l=M.filter(m=>m.at).sort((a,b)=>b.at-a.at)[0];
- $("#hr").innerHTML=l?"<b>Continue</b> "+esc(l.title)+'<i><b style="width:'+l.pr+'%"></b></i>':""}catch(e){$("#hm").textContent="Storage unavailable"}}
-async function shelf(){let M=[];try{M=await DB.all("meta")}catch(e){}
- M.sort((a,b)=>(b.at||b.added)-(a.at||a.added));const el=$("#shelf");
- if(!M.length){el.innerHTML='<div class="em">Add your first book. Choose your books folder — each book lives in its own folder with book.json, its text and its cover.</div>';return}
- el.innerHTML=M.map(m=>'<div class="bk"><div class="cv" data-cv="'+m.id+'"><span>No cover</span></div><button class="o" data-o="'+m.id+'"><div class="t">'+esc(m.title)+'</div><div class="s">'+(m.author?esc(m.author)+", ":"")+m.n+" chapters, "+m.pr+'% read</div><i><b style="width:'+m.pr+'%"></b></i></button><button class="x" data-x="'+m.id+'">Remove</button></div>').join("");
- el.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>openBook(b.dataset.o));
- el.querySelectorAll("[data-x]").forEach(b=>b.onclick=async()=>{if(!confirm("Remove this book and its highlights?"))return;
-  const id=b.dataset.x;await DB.del("meta",id);await DB.del("text",id);for(const k of (await DB.all("marks")).filter(k=>k.b===id))await DB.del("marks",k.id);
-  for(const r of (await DB.all("blob").catch(()=>[])).filter(r=>String(r.id).indexOf(id+"/")===0))await DB.del("blob",r.id);
-  for(const k of [...urls.keys()])if(k.indexOf(id+"/")===0){URL.revokeObjectURL(urls.get(k));urls.delete(k)}
-  shelf()});
- covers(M)}
-async function covers(M){for(const m of M){const cell=document.querySelector('#shelf .cv[data-cv="'+m.id+'"]');if(!cell)continue;
- let rec=null;try{rec=await DB.get("blob",m.id+"/thumb")||await DB.get("blob",m.id+"/cover")}catch(e){}
- if(!rec||!rec.blob)continue;
- cell.innerHTML='<img alt="" loading="lazy" src="'+getUrl(m.id+"/thumb",rec.blob)+'">'}}
-/* reader */
-let B=null;
-async function openBook(id){let m,t,k;try{[m,t,k]=await Promise.all([DB.get("meta",id),DB.get("text",id),DB.all("marks")])}catch(e){return toast("Storage is busy. Close other Stillpoint tabs and try again.")}
- if(!m||!t||!t.ch||!t.ch.length)return toast("That book is missing from the library.");
- B={m,c:t.ch,i:Math.min(m.i||0,t.ch.length-1),k:k.filter(x=>x.b===id)};show("read");$("#read").classList.remove("hide");render(m.y||0)}
-function para(p,i,pi){const ms=B.k.filter(k=>k.ch===i&&k.pi===pi).sort((a,b)=>a.s-b.s);let o="",x=0;
- for(const k of ms){if(k.s<x)continue;o+=esc(p.slice(x,k.s))+'<mark data-k="'+k.id+'">'+esc(p.slice(k.s,k.e))+"</mark>";x=k.e}return o+esc(p.slice(x))}
-function figHtml(pi){const c=B.c[B.i];return (c.imgs||[]).filter(x=>x.pi===pi).map(x=>{
- const r=x.width&&x.height?' style="aspect-ratio:'+x.width+"/"+x.height+'"':"";
- return '<figure class="fig" data-load="'+x.id+'" data-cap="'+esc(x.caption||"").replace(/"/g,"&quot;")+'"'+r+'><div class="ph"></div>'+(x.caption?"<figcaption>"+esc(x.caption)+"</figcaption>":"")+"</figure>"}).join("")}
-async function fillFig(f){if(f.dataset.done)return;f.dataset.done="1";
- let rec=null;try{rec=await DB.get("blob",B.m.id+"/"+f.dataset.load)}catch(e){}
- if(!rec||!rec.blob){f.innerHTML='<div class="na">Image unavailable'+(f.dataset.cap?": "+esc(f.dataset.cap):"")+"</div>";return}
- const u=getUrl(B.m.id+"/"+f.dataset.load,rec.blob);
- f.innerHTML='<img alt="" src="'+u+'" loading="lazy">'+(f.dataset.cap?"<figcaption>"+esc(f.dataset.cap)+"</figcaption>":"");
- f.onclick=()=>{const iv=$("#iv");iv.querySelector("img").src=u;iv.classList.add("on")}}
-function hydrate(){const fs=[...document.querySelectorAll("#tx figure.fig[data-load]")];if(!fs.length)return;
- if(IO)IO.disconnect();
- IO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){IO.unobserve(e.target);fillFig(e.target)}}),{root:$("#rd"),rootMargin:"500px"});
- fs.forEach(f=>IO.observe(f))}
-function render(y){const c=B.c[B.i];
- $("#tx").innerHTML="<h2>"+esc(c.t)+"</h2>"+figHtml(0)+c.p.map((p,pi)=>'<p data-p="'+pi+'">'+para(p,B.i,pi)+"</p>"+figHtml(pi+1)).join("")+
-  '<div class="nv"><button data-n="-1"'+(B.i?"":" hidden")+'>Previous chapter</button><button data-n="1"'+(B.i<B.c.length-1?"":" hidden")+">Next chapter</button></div>";
- $("#ct").textContent=c.t;$("#tx").querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{B.i+=+b.dataset.n;render(0)});
- $("#tx").querySelectorAll("mark").forEach(m=>m.onclick=async e=>{e.stopPropagation();if(!confirm("Remove this highlight?"))return;await DB.del("marks",m.dataset.k);B.k=B.k.filter(k=>k.id!==m.dataset.k);render(rd.scrollTop/(rd.scrollHeight-rd.clientHeight||1))});
- const rd=$("#rd");requestAnimationFrame(()=>{rd.scrollTop=y*(rd.scrollHeight-rd.clientHeight);prog();hydrate()})}
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
 let sv;const rd=$("#rd");
 function prog(){if(!B)return;const f=rd.scrollTop/(rd.scrollHeight-rd.clientHeight||1),p=Math.min(100,Math.round((B.i+f)/B.c.length*100));
  $("#pg").style.width=p+"%";clearTimeout(sv);const bk=B;sv=setTimeout(()=>{if(!bk)return;Object.assign(bk.m,{i:bk.i,y:f,pr:p,at:Date.now()});DB.put("meta",bk.m).catch(()=>{})},400)}
@@ -475,27 +312,11 @@ function sessView(){const c=CL.find(x=>x.id===V.id),o=SE.find(x=>x.id===V.sid)||
 /* backups: plain files you keep; client backups stay encrypted with your PIN */
 async function saveFile(name,data){try{const b=data instanceof Blob?data:new Blob([data],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);toast("Saved to your downloads.")}catch(e){toast("Could not save the file.")}}
 const stamp=()=>new Date().toLocaleDateString("en-CA");
-<<<<<<< HEAD
 $("#lb").onclick=async()=>{try{toast("Preparing backup…");const[meta,text,marks]=await Promise.all([DB.all("meta"),DB.all("text"),DB.all("marks")]);
  saveFile("stillpoint-library-"+stamp()+".json",new Blob([JSON.stringify({app:"stillpoint",kind:"library",v:1,meta,text,marks})],{type:"application/json"}))}catch(e){toast("Could not read the library.")}};
 $("#lr").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
  try{const j=JSON.parse(await f.text());if(j.app!=="stillpoint"||j.kind!=="library")throw 0;toast("Restoring…");
   for(const s of["meta","text","marks"])for(const r of j[s])await DB.put(s,r);toast("Library restored.");shelf()}catch(x){toast("That is not a Stillpoint library backup.")}};
-=======
-const b64Of=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(",")[1]||"");r.onerror=()=>rej(r.error);r.readAsDataURL(b)});
-const fromB64=(d,t)=>{const s=atob(d),a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);return new Blob([a],{type:t||"application/octet-stream"})};
-$("#lb").onclick=async()=>{try{toast("Preparing backup…");const[meta,text,marks,bl]=await Promise.all([DB.all("meta"),DB.all("text"),DB.all("marks"),DB.all("blob")]);
- const total=bl.reduce((a,r)=>a+((r.blob&&r.blob.size)||0),0);
- if(total>120*1024*1024&&!confirm("This library holds "+Math.round(total/1048576)+" MB of covers and figures. The backup file will be large and slow to write. Continue?"))return;
- const blobs=[];
- for(const r of bl){if(!r.blob)continue;blobs.push({id:r.id,type:r.blob.type||"",data:await b64Of(r.blob)})}
- saveFile("stillpoint-library-"+stamp()+".json",new Blob([JSON.stringify({app:"stillpoint",kind:"library",v:2,meta,text,marks,blobs})],{type:"application/json"}))}catch(e){toast("Could not read the library.")}};
-$("#lr").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
- try{const j=JSON.parse(await f.text());if(j.app!=="stillpoint"||j.kind!=="library")throw 0;toast("Restoring…");
-  for(const s of["meta","text","marks"])for(const r of (j[s]||[]))await DB.put(s,r);
-  for(const b of (j.blobs||[]))if(b&&b.id&&b.data)await DB.put("blob",{id:b.id,blob:fromB64(b.data,b.type)});
-  toast("Library restored.");shelf()}catch(x){toast("That is not a Stillpoint library backup.")}};
->>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
 $("#cbu").onclick=async()=>{try{const[cfg,rec]=await Promise.all([CD.get("cfg","cfg"),CD.all("rec")]);saveFile("stillpoint-clients-"+stamp()+".json",JSON.stringify({app:"stillpoint",kind:"clients",v:1,cfg,rec}))}catch(e){toast("Could not read the clients.")}};
 $("#crs").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
  try{const j=JSON.parse(await f.text());if(j.app!=="stillpoint"||j.kind!=="clients"||!j.cfg)throw 0;
