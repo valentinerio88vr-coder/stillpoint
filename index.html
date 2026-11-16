@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stillpoint</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0F1620">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Stillpoint">
+<style>
+@font-face{font-family:"Literata";src:url(fonts/literata-latin-wght-normal.woff2) format("woff2");font-weight:200 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Literata";src:url(fonts/literata-latin-wght-italic.woff2) format("woff2");font-weight:200 900;font-style:italic;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-latin-wght-normal.woff2) format("woff2");font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-latin-wght-italic.woff2) format("woff2");font-weight:200 800;font-style:italic;font-display:swap}
+@font-face{font-family:"Hanken Grotesk";src:url(fonts/hanken-grotesk-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+:root{--bg:#E3E6E1;--fg:#1A2028;--soft:#4C5560;--rule:rgba(26,32,40,.2);--acc:#1F3F66;--hl:rgba(214,170,70,.42);--fs:19px;--lh:1.65;--rf:"Literata",Georgia,serif;
+--pp:#E3E6E1;--pi:#1A2028;--pa:#1F3F66;--nn:#0F1620;--nt:#E4DED6;--nr:#D8A99B;--nm:#8E98A8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="sepia"]){--bg:#0F1620;--fg:#E4DED6;--soft:#8E98A8;--rule:rgba(228,222,214,.18);--acc:#D8A99B;--hl:rgba(214,170,70,.32);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1620;--fg:#E4DED6;--soft:#8E98A8;--rule:rgba(228,222,214,.18);--acc:#D8A99B;--hl:rgba(214,170,70,.32);color-scheme:dark}
+:root[data-theme="sepia"]{--bg:#E9DFCB;--fg:#2B2218;--soft:#6A5C49;--rule:rgba(43,34,24,.2);--acc:#5B3A22}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{height:100%;background:var(--bg);color:var(--fg);font-family:"Hanken Grotesk",system-ui,sans-serif;overflow:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.v{position:absolute;inset:0;display:none;flex-direction:column}.v.on{display:flex}
+/* home */
+#home .a,#home .b{flex:1;border:0;text-align:left;padding:28px 30px;display:flex;flex-direction:column;justify-content:flex-end;width:100%}
+#home .a{background:var(--pp);color:var(--pi)}#home .b{background:var(--nn);color:var(--nt);flex:.85}
+.wm{font-family:Newsreader,Georgia,serif;font-style:italic;font-size:21px;position:absolute;top:calc(env(safe-area-inset-top,0px) + 22px);left:30px;color:var(--pi);z-index:2}
+.dt{font-family:Newsreader,Georgia,serif;font-weight:400;font-size:62px;line-height:1;letter-spacing:-.8px}
+.m{font-size:15px;margin-top:10px;opacity:.75}.rs{font-size:14px;margin-top:22px;min-height:40px}.rs i{display:block;height:2px;background:rgba(26,32,40,.2);margin-top:9px}.rs i b{display:block;height:100%;background:var(--pa)}
+/* library */
+.hd{display:flex;align-items:center;justify-content:space-between;padding:18px 22px 10px;gap:12px}
+.hd h1{font-family:Newsreader,Georgia,serif;font-weight:400;font-size:34px}
+.lk{font-size:15px;color:var(--acc);padding:8px 0;font-weight:500}
+#shelf{overflow:auto;flex:1;padding:6px 22px 40px}
+.bk{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--rule);padding:14px 0}
+.bk .o{flex:1;text-align:left;min-width:0}.bk .t{font-family:Newsreader,Georgia,serif;font-size:21px;line-height:1.25}
+.bk .s{font-size:13px;color:var(--soft);margin-top:3px}.bk i{display:block;height:2px;background:var(--rule);margin-top:8px}.bk i b{display:block;height:100%;background:var(--acc)}
+.bk .x{font-size:13px;color:var(--soft);padding:8px 0 8px 8px}
+<<<<<<< HEAD
+=======
+.bk .cv{width:44px;height:64px;flex:none;border-radius:3px;overflow:hidden;background:var(--rule);display:flex;align-items:center;justify-content:center}
+.bk .cv img{width:100%;height:100%;object-fit:cover;display:block}
+.bk .cv span{font-size:10px;line-height:1.2;color:var(--soft);text-align:center;padding:2px}
+#tx figure.fig{position:relative;margin:1.8em 0;min-height:110px}
+#tx figure.fig .ph{position:absolute;inset:0;background:var(--rule);border-radius:4px}
+#tx figure.fig img{display:block;width:100%;height:auto;border-radius:4px;background:var(--rule)}
+#tx figure.fig figcaption{font-family:"Hanken Grotesk",sans-serif;font-size:13px;line-height:1.45;color:var(--soft);padding:8px 2px 0;text-indent:0;text-align:center}
+#tx figure.fig .na{display:flex;align-items:center;justify-content:center;text-align:center;min-height:110px;font-family:"Hanken Grotesk",sans-serif;font-size:13px;line-height:1.45;color:var(--soft);border:1px dashed var(--rule);border-radius:6px;padding:16px 12px}
+#iv{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:25;display:none;align-items:center;justify-content:center;padding:14px}
+#iv.on{display:flex}#iv img{max-width:100%;max-height:100%;object-fit:contain}
+>>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
+.em{padding:60px 8px;color:var(--soft);font-size:16px;line-height:1.5;max-width:30ch}
+/* reader */
+#read{background:var(--bg)}#rd{flex:1;overflow:auto;padding:70px 0 90px}
+#tx{max-width:38rem;margin:0 auto;padding:0 28px;font-family:var(--rf);font-size:var(--fs);line-height:var(--lh)}
+#tx h2{font-family:Newsreader,Georgia,serif;font-style:italic;font-weight:400;font-size:1.5em;margin:.2em 0 1.2em;line-height:1.2}
+#tx p{text-indent:1.5em;hyphens:auto}#tx h2+p{text-indent:0}
+#tx mark{background:var(--hl);color:inherit;border-radius:2px}
+.nv{display:flex;justify-content:space-between;margin-top:2.4em;font-family:"Hanken Grotesk",sans-serif;font-size:15px}
+.bar{position:fixed;left:0;right:0;background:var(--bg);display:flex;align-items:center;justify-content:space-between;padding:10px 18px;z-index:5;transition:transform .2s}
+.bar.t{top:env(safe-area-inset-top,0px);border-bottom:1px solid var(--rule)}.bar.u{bottom:0;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--rule)}
+.hide .bar.t{transform:translateY(-120%)}.hide .bar.u{transform:translateY(120%)}
+.bar .c{font-family:Newsreader,Georgia,serif;font-style:italic;font-size:15px;color:var(--soft);max-width:55%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar button{padding:6px 8px;font-size:15px}
+#hb{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(70px + env(safe-area-inset-bottom,0px));background:var(--acc);color:var(--bg);padding:11px 20px;border-radius:10px;font-weight:600;z-index:6;display:none}
+#pg{position:fixed;left:0;bottom:0;height:2px;background:var(--acc);z-index:4}
+/* sheet */
+#sh{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;z-index:20;align-items:flex-end}#sh.on{display:flex}
+#sc{background:var(--bg);width:100%;max-height:75%;overflow:auto;border-radius:14px 14px 0 0;padding:20px 22px calc(24px + env(safe-area-inset-bottom,0px));animation:up .2s ease}
+@keyframes up{from{transform:translateY(30px);opacity:0}}
+@media (prefers-reduced-motion:reduce){#sc{animation:none}.bar{transition:none}}
+#sc h3{font-family:Newsreader,Georgia,serif;font-weight:400;font-size:24px;margin-bottom:12px}
+.li{display:block;width:100%;text-align:left;padding:11px 0;border-bottom:1px solid var(--rule);font-size:16px;line-height:1.4}.li small{display:block;color:var(--soft);font-size:13px}.li.cur{color:var(--acc);font-weight:600}
+.st{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--rule);font-size:15px;gap:8px}
+.st div{display:flex;gap:6px}.st button{padding:7px 12px;border:1px solid var(--rule);border-radius:6px}.st button.on{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+#q{width:100%;font:inherit;font-size:16px;padding:10px 0;background:none;border:0;border-bottom:1px solid var(--rule);color:var(--fg);margin-bottom:8px}
+#ts{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 20px);transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:14px;z-index:30;display:none;max-width:88%}
+:root.cn{--bg:#0F1620;--fg:#E4DED6;--soft:#8E98A8;--rule:rgba(228,222,214,.18);--acc:#D8A99B;color-scheme:dark}
+#cb{flex:1;overflow:auto;padding:0 22px 40px;max-width:40rem;width:100%;margin:0 auto}
+.pn{max-width:22rem;margin:14vh auto 0;display:flex;flex-direction:column;gap:14px}.pn h2{font-family:Newsreader,Georgia,serif;font-weight:400;font-size:44px}.pn p{color:var(--soft);line-height:1.5;font-size:15px}
+.pn input{font:inherit;font-size:24px;letter-spacing:.4em;text-align:center;padding:12px;background:none;border:1px solid var(--rule);border-radius:8px;color:var(--fg)}
+.in{width:100%;font:inherit;font-size:16px;padding:10px 0;background:none;border:0;border-bottom:1px solid var(--rule);color:var(--fg);resize:none;display:block}textarea.in{font-family:Literata,Georgia,serif;line-height:1.5}
+.fl{margin-top:22px}.fl label{display:block;font-size:13px;color:var(--soft);margin-bottom:4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}.cp{font-size:14px;padding:8px 12px;border:1px solid var(--rule);border-radius:6px}.cp.on{background:var(--acc);color:var(--bg);border-color:var(--acc);font-weight:600}
+.pb{display:block;width:100%;background:var(--acc);color:var(--bg);border-radius:10px;height:50px;font-weight:650;font-size:16px;margin-top:24px}.er{color:var(--acc);font-size:14px;min-height:20px}
+.ti{font-family:Newsreader,Georgia,serif;font-weight:400;font-size:22px;display:block}.dg{color:var(--soft);font-size:14px;padding:14px 0}
+.ft{display:flex;gap:26px;justify-content:center;padding:6px 22px calc(8px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--rule)}
+#gr{overflow:auto;flex:1;padding:6px 22px 40px}#gr mark{background:var(--hl);color:inherit;border-radius:2px}
+#tx p.sp{background:var(--hl);border-radius:3px}.bar.t .c{max-width:36%}.bar .g{display:flex;gap:2px}
+.ft{flex-wrap:wrap;gap:4px 22px}
+.z{fill:transparent;stroke:var(--soft);stroke-width:1.4;cursor:pointer;pointer-events:all}.z.on{fill:var(--acc);fill-opacity:.5;stroke:var(--acc)}.z:focus-visible{outline:2px solid var(--acc)}
+.ph{font-family:Literata,Georgia,serif;font-size:21px;letter-spacing:.08em;text-align:center;padding:16px 8px;border:1px solid var(--rule);border-radius:8px;margin:14px 0;user-select:all}select.in{appearance:none;background:none}
+#ex{overflow:auto;padding:0 22px 40px}.card{font-family:Literata,Georgia,serif;font-size:21px;line-height:1.55;min-height:34vh;padding:24px 2px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column;justify-content:center}.lkr{display:flex;flex-wrap:wrap;gap:2px 22px;padding:0 22px 6px}
+#home .c3{background:#1F3F66;color:#E3E6E1;border:0;text-align:left;padding:16px 30px;display:flex;justify-content:space-between;align-items:baseline;width:100%;flex:none}.c3 .dt3{font-family:Newsreader,Georgia,serif;font-size:26px}.c3 .m3{font-size:13px;opacity:.75}
+</style>
+</head>
+<body>
+<div id="home" class="v on">
+  <div class="wm">Stillpoint</div>
+  <button class="a" id="d1"><div class="dt">Library</div><div class="m" id="hm">No books yet</div><div class="rs" id="hr"></div></button>
+  <button class="b" id="d2"><div class="dt">Clients</div><div class="m" style="color:var(--nm)">Locked with a PIN</div></button>
+  <button class="c3" id="d3"><span class="dt3">Teaching</span><span class="m3">Students, lessons, handouts</span></button>
+</div>
+<div id="lib" class="v">
+<<<<<<< HEAD
+  <div class="hd"><button class="lk" id="bh">Home</button><h1>Library</h1><label class="lk" style="cursor:pointer">Add books<input id="fi" type="file" accept=".txt,text/plain" multiple hidden></label></div>
+=======
+  <div class="hd"><button class="lk" id="bh">Home</button><h1>Library</h1><button class="lk" id="fi">Add books folder</button><input id="fd2" type="file" webkitdirectory multiple hidden></div>
+>>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
+  <div style="padding:0 22px 6px"><input class="in" id="gq" type="search" placeholder="Search all books" aria-label="Search all books" enterkeyhint="search" autocomplete="off"></div>
+  <div class="lkr"><button class="lk" id="ls">Study</button><button class="lk" id="lg">Glossary</button><button class="lk" id="lt">Techniques</button><button class="lk" id="lp">Practice log</button></div>
+  <div id="gr" hidden></div>
+  <div id="shelf"></div>
+<<<<<<< HEAD
+  <div class="ft"><button class="lk" id="lb">Back up library</button><label class="lk" style="cursor:pointer">Restore<input id="lr" type="file" accept=".json,application/json" hidden></label></div>
+=======
+  <div class="ft"><button class="lk" id="lb">Back up library</button><label class="lk" style="cursor:pointer">Restore<input id="lr" type="file" accept=".json,application/json" hidden></label><button class="lk" id="frs" hidden>Rescan folder</button></div>
+>>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
+</div>
+<div id="read" class="v">
+  <div class="bar t"><button id="br">Library</button><span class="c" id="ct"></span><span class="g"><button id="bz" aria-label="Reading speed">1×</button><button id="bl">Listen</button></span></div>
+  <div id="rd"><div id="tx"></div></div>
+  <div id="pg"></div>
+  <button id="hb">Highlight</button>
+  <div class="bar u"><button id="bc">Contents</button><button id="bs">Search</button><button id="bn">Notes</button><button id="bk">Marks</button><button id="ba">Aa</button></div>
+</div>
+<div id="cl" class="v"><div id="cb"></div><div class="ft" id="cf" style="display:none"><button class="lk" id="cbu">Back up clients</button><button class="lk" id="cbi">Biometric unlock</button><button class="lk" id="csec">Recovery and PIN</button><label class="lk" style="cursor:pointer">Restore<input id="crs" type="file" accept=".json,application/json" hidden></label></div></div>
+<div id="ex" class="v"></div>
+<div id="sh"><div id="sc"></div></div>
+<<<<<<< HEAD
+=======
+<div id="iv"><img alt=""></div>
+>>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
+<div id="ts"></div>
+<script>
+"use strict";
+const $=s=>document.querySelector(s),R=document.documentElement;
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+let tt;const toast=m=>{const t=$("#ts");t.textContent=m;t.style.display="block";clearTimeout(tt);tt=setTimeout(()=>t.style.display="none",2600)};
+/* settings (per-viewer convenience, guarded) */
+let S={fs:19,lh:1.65,rf:"serif",th:""};
+try{Object.assign(S,JSON.parse(localStorage.getItem("sp-set")||"{}"))}catch(e){}
+const FONTS={serif:'"Literata",Georgia,serif',news:'"Newsreader",Georgia,serif',sys:'Georgia,"Times New Roman",serif'};
+function applySet(){R.style.setProperty("--fs",S.fs+"px");R.style.setProperty("--lh",S.lh);R.style.setProperty("--rf",FONTS[S.rf]);
+ S.th?R.setAttribute("data-theme",S.th):R.removeAttribute("data-theme");try{localStorage.setItem("sp-set",JSON.stringify(S))}catch(e){}}
+applySet();
+/* storage */
+<<<<<<< HEAD
+const DB=(()=>{let p;const open=()=>p||(p=new Promise((res,rej)=>{const r=indexedDB.open("stillpoint-library",1);
+ r.onupgradeneeded=()=>{const d=r.result;["meta","text","marks"].forEach(n=>d.createObjectStore(n,{keyPath:"id"}))};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}));
+ const tx=async(s,m,f)=>{const d=await open();return new Promise((res,rej)=>{const t=d.transaction(s,m);const o=f(t);t.oncomplete=()=>res(o&&o.result);t.onerror=()=>rej(t.error)})};
+ return{all:s=>tx(s,"readonly",t=>t.objectStore(s).getAll()),get:(s,k)=>tx(s,"readonly",t=>t.objectStore(s).get(k)),
+ put:(s,v)=>tx(s,"readwrite",t=>{t.objectStore(s).put(v)}),del:(s,k)=>tx(s,"readwrite",t=>{t.objectStore(s).delete(k)})}})();
+=======
+/* covers and figures live in their own database, so an updated app never has to
+   version-upgrade the library store while another tab still holds it open */
+const mdb=(name,stores)=>{let p;const open=()=>p||(p=new Promise((res,rej)=>{const r=indexedDB.open(name,1);
+ let g=setTimeout(()=>rej(new Error("storage-busy")),8000);
+ r.onupgradeneeded=()=>{const d=r.result;stores.forEach(n=>{if(!d.objectStoreNames.contains(n))d.createObjectStore(n,{keyPath:"id"})})};
+ r.onsuccess=()=>{clearTimeout(g);res(r.result)};r.onerror=()=>{clearTimeout(g);rej(r.error)};r.onblocked=()=>{clearTimeout(g);rej(new Error("storage-blocked"))}}));
+ const tx=async(s,m,f)=>{const d=await open();return new Promise((res,rej)=>{const t=d.transaction(s,m);const o=f(t);t.oncomplete=()=>res(o&&o.result);t.onerror=()=>rej(t.error)})};
+ return{all:s=>tx(s,"readonly",t=>t.objectStore(s).getAll()),get:(s,k)=>tx(s,"readonly",t=>t.objectStore(s).get(k)),
+ put:(s,v)=>tx(s,"readwrite",t=>{t.objectStore(s).put(v)}),del:(s,k)=>tx(s,"readwrite",t=>{t.objectStore(s).delete(k)})}};
+const DB=(()=>{const main=mdb("stillpoint-library",["meta","text","marks"]),extra=mdb("stillpoint-assets",["blob","kv"]),pick=s=>s==="blob"||s==="kv"?extra:main;
+ return{all:s=>pick(s).all(s),get:(s,k)=>pick(s).get(s,k),put:(s,v)=>pick(s).put(s,v),del:(s,k)=>pick(s).del(s,k)}})();
+>>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
+/* import: clean PDF-converted text, then split into chapters */
+function clean(raw){
+ const L=raw.replace(/\r/g,"").replace(/\f/g,"\n\n").split("\n").map(l=>l.trim()),f={};
+ L.forEach(l=>{if(l)f[l]=(f[l]||0)+1});
+ const K=L.filter(l=>!(l&&(/^(page\s*)?\d{1,4}$/i.test(l)||(f[l]>=6&&l.length<70))));
+ const lens=K.filter(Boolean).map(l=>l.length).sort((a,b)=>a-b),mx=lens[Math.floor(lens.length*.9)]||80,P=[];let c="";
+ for(const l of K){
+  if(!l){if(c)P.push(c);c="";continue}
+  if(!c){c=l;continue}
+  if(/[a-z]-$/.test(c)&&/^[a-z]/.test(l))c=c.slice(0,-1)+l;
+  else if(/[.!?”"')]$/.test(c)&&c.length<mx*.75&&/^[A-Z“"‘]/.test(l)){P.push(c);c=l}
+  else c+=" "+l}
+ if(c)P.push(c);return P}
+const isH=p=>p.length<80&&(/^(chapter|part|section)\s+([0-9ivxlc]+|[a-z]+)\b/i.test(p)||/^\d{1,2}[.)]\s+[A-Z]/.test(p)||(p.length>3&&p===p.toUpperCase()&&/[A-Z]{3}/.test(p)&&!/[.!?]$/.test(p)));
+function chapters(P){const C=[];let cur=null;
+ for(const p of P){if(isH(p)){cur={t:p.replace(/\s+/g," "),p:[]};C.push(cur)}else{if(!cur){cur={t:"Beginning",p:[]};C.push(cur)}cur.p.push(p)}}
+ const good=C.filter(c=>c.p.length);
+ if(good.length<2){const out=[];for(let i=0;i<P.length;i+=40)out.push({t:"Part "+(out.length+1),p:P.slice(i,i+40)});return out}
+ return good}
+<<<<<<< HEAD
+async function importFiles(files){let n=0;
+ for(const f of files){toast("Importing "+(n+1)+" of "+files.length+"…");
+  try{const P=clean(await f.text()),C=chapters(P),id="b"+Date.now()+Math.random().toString(36).slice(2,6);
+   const title=f.name.replace(/\.txt$/i,"").replace(/[_]+/g," ").trim();
+   await DB.put("text",{id,ch:C,source:(f&&f.name)||null});await DB.put("meta",{id,title,n:C.length,added:Date.now(),at:0,i:0,y:0,pr:0,source:(f&&f.name)||null});n++}
+  catch(e){toast("Could not import "+f.name)}}
+ if(n)toast("Added "+n+(n>1?" books.":" book."));shelf()}
+async function importRootBooks(){
+ try{const res=await fetch("./BOOKS/index.json",{cache:"no-store"});if(!res.ok) return;
+  const files=await res.json();if(!Array.isArray(files)||!files.length) return;
+  const existing=await DB.all("meta");const loaded=new Set(existing.map(m=>m.source||""));
+  const pending=files.filter(f=>!loaded.has(f));
+  if(!pending.length) return;
+  toast("Loading "+pending.length+" books from the root BOOKS folder…");
+  for(const file of pending){
+   try{const text=await fetch(file,{cache:"no-store"}).then(r=>r.text());const P=clean(text),C=chapters(P),id="b"+Date.now()+Math.random().toString(36).slice(2,6);
+    const title=file.split("/").pop().replace(/\.txt$/i,"").replace(/[_]+/g," ").trim();
+    await DB.put("text",{id,ch:C,source:file});await DB.put("meta",{id,title,n:C.length,added:Date.now(),at:0,i:0,y:0,pr:0,source:file});}
+   catch(e){}}
+  }
+  toast("Books loaded from the root folder.");
+  await home();
+  shelf();
+ }catch(e){} }
+=======
+/* library books: folders in the converter's sidecar format
+   <book>/book.json + <book>/<text>.txt + <book>/assets/*
+   book.json lists assets (id, file, width, height, caption) and markers (id, offset);
+   the text itself carries [[img:id]] needles where a figure belongs. */
+const NEEDLE=/\u0001([^\u0001]+)\u0001/g,RAWNEEDLE=/\[\[img:([A-Za-z0-9_.-]+)\]\]/g;
+const urls=new Map(),getUrl=(k,b)=>{let u=urls.get(k);if(!u){u=URL.createObjectURL(b);urls.set(k,u)}return u};
+let IO=null;
+function stripHead(raw,title){
+ const L=raw.replace(/\r/g,"").split("\n");let i=0;while(i<L.length&&!L[i].trim())i++;
+ if(i>=L.length)return raw;
+ const t=L[i].trim().toLowerCase(),ti=String(title||"").trim().toLowerCase();
+ if(!t||!ti||!(t===ti||ti.indexOf(t.slice(0,20))===0))return raw;
+ let d=-1;for(let j=i;j<Math.min(L.length,i+8);j++)if(L[j].trim()==="---"){d=j;break}
+ return d>-1?L.slice(d+1).join("\n"):raw}
+function figRef(id,A){const a=A[id]||{};return {pi:0,id,caption:a.caption||"",width:a.width||0,height:a.height||0}}
+function splitImgs(raw,A){
+ const P=clean(raw.replace(RAWNEEDLE,"\n\n\u0001$1\u0001\n\n")),C=chapters(P);
+ for(const c of C){const imgs=[],keep=[];
+  for(const p of c.p){const toks=[...p.matchAll(NEEDLE)].map(m=>m[1]),txt=p.replace(NEEDLE,"").replace(RAWNEEDLE,"").trim();
+   if(toks.length){for(const id of toks)imgs.push({...figRef(id,A),pi:keep.length});if(!txt)continue}
+   keep.push(txt)}
+  c.p=keep;c.imgs=imgs}
+ return C}
+async function thumbOf(f){try{const b=await createImageBitmap(f),s=Math.min(1,300/Math.max(b.width,b.height)),c=document.createElement("canvas");
+ c.width=Math.max(1,Math.round(b.width*s));c.height=Math.max(1,Math.round(b.height*s));c.getContext("2d").drawImage(b,0,0,c.width,c.height);if(b.close)b.close();
+ return await new Promise(r=>c.toBlob(r,"image/jpeg",.82))}catch(e){return null}}
+async function ingestBook(name,src){
+ let js;try{js=JSON.parse(await (await src.read("book.json")).text())}catch(e){return false}
+ const names=await src.list().catch(()=>[]);let tp=null;
+ for(const c of [js.text_file,"content.txt",(name||"")+".txt"])if(c&&names.indexOf(c)>-1){tp=c;break}
+ if(!tp)tp=names.find(n=>/\.txt$/i.test(n))||null;
+ if(!tp)return false;
+ let raw;try{raw=await (await src.read(tp)).text()}catch(e){return false}
+ const title=String(js.title||name||"Untitled").trim()||"Untitled",author=String(js.author||"").trim();
+ const A={};(js.assets||[]).forEach(a=>{if(a&&a.id)A[a.id]=a});
+ const C=splitImgs(stripHead(raw,title),A);
+ if(!C.length)return false;
+ if(!C.some(c=>c.imgs.length)&&Array.isArray(js.markers)){
+  const len=Math.max(1,raw.length);
+  for(const m of js.markers){if(!m||m.type!=="image"||!m.id||!A[m.id])continue;
+   const ci=Math.min(C.length-1,Math.floor((m.offset||0)/len*C.length)),c=C[ci];if(!c)continue;
+   c.imgs.push({pi:Math.max(0,c.p.length-1),id:m.id,caption:A[m.id].caption||"",width:A[m.id].width||0,height:A[m.id].height||0})}}
+ const id="b"+Date.now()+Math.random().toString(36).slice(2,6);let n=0;
+ for(const aid in A){try{const f=await src.read(A[aid].file||("assets/"+aid));await DB.put("blob",{id:id+"/"+aid,blob:f});n++}catch(e){}}
+ let cover=0;
+ if(js.cover){try{const f=await src.read(js.cover);await DB.put("blob",{id:id+"/cover",blob:f});const t=await thumbOf(f);if(t)await DB.put("blob",{id:id+"/thumb",blob:t});cover=1}catch(e){}}
+ await DB.put("text",{id,ch:C});
+ await DB.put("meta",{id,title,author,dir:name||"",fmt:"sp",n:C.length,added:Date.now(),at:0,i:0,y:0,pr:0,cover,assetsN:n});
+ return true}
+async function ingestRoot(root){
+ const dirs=[];
+ const walk=async(d,depth)=>{const es=[];try{for await(const [n,h] of d.entries())es.push([n,h])}catch(e){return}
+  if(es.some(([n,h])=>h.kind==="file"&&n==="book.json")){dirs.push(d);return}
+  if(depth<2)for(const [n,h] of es)if(h.kind==="directory"&&n[0]!==".")await walk(h,depth+1)};
+ await walk(root,0);
+ if(!dirs.length)return toast("No books found. Each book needs its own folder with book.json.");
+ const have=new Set((await DB.all("meta").catch(()=>[])).map(m=>m.dir).filter(Boolean));
+ let ok=0,skip=0,n=0;
+ for(const d of dirs){if(have.has(d.name)){skip++;continue}
+  const src={read:async p=>{const ps=p.split("/");let x=d;for(const q of ps.slice(0,-1))x=await x.getDirectoryHandle(q);return (await x.getFileHandle(ps[ps.length-1])).getFile()},
+   list:async()=>{const o=[];for await(const [nm] of d.entries())o.push(nm);return o}};
+  n++;toast("Importing "+n+" of "+(dirs.length-skip)+"…");
+  try{if(await ingestBook(d.name,src))ok++}catch(e){}}
+ toast(ok?"Added "+ok+(ok>1?" books.":" book.")+(skip?" "+skip+" already in your library.":""):(skip?"Those books are already in your library.":"Could not read those books."));shelf()}
+async function ingestFiles(list){
+ const all=list.map(f=>({p:String(f.webkitRelativePath||f.name).split("/"),f}));
+ const roots=new Set();
+ for(const {p} of all)if(p[p.length-1]==="book.json")roots.add(p.slice(0,-1).join("/"));
+ const have=new Set((await DB.all("meta").catch(()=>[])).map(m=>m.dir).filter(Boolean));
+ let ok=0,skip=0,n=0;
+ for(const D of roots){
+  const pre=D?D+"/":"",files=new Map();
+  for(const {p,f} of all){const s=p.join("/");if(s.indexOf(pre)===0)files.set(s.slice(pre.length),f)}
+  const name=D.split("/").pop()||"Untitled";
+  if(have.has(name)){skip++;continue}
+  const src={read:async p=>{const f=files.get(p);if(!f)throw new Error("missing "+p);return f},list:async()=>[...files.keys()]};
+  n++;toast("Importing "+n+"…");
+  try{if(await ingestBook(name,src))ok++}catch(e){}}
+ toast(ok?"Added "+ok+(ok>1?" books.":" book.")+(skip?" "+skip+" already in your library.":""):(skip?"Those books are already in your library.":"No books found. Each book needs its own folder with book.json."));shelf()}
+const dirPerm=async h=>{try{if(!h.queryPermission)return true;if(await h.queryPermission({mode:"read"})==="granted")return true;return await h.requestPermission({mode:"read"})==="granted"}catch(e){return false}};
+>>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
+/* views */
+const show=v=>{document.querySelectorAll(".v").forEach(e=>e.classList.toggle("on",e.id===v));R.classList.toggle("cn",v==="cl");if(v!=="cl")lockCl();if(v==="home")home()};
+$("#d1").onclick=()=>{show("lib");shelf()};$("#bh").onclick=()=>show("home");
+$("#d2").onclick=()=>{V={m:"list"};show("cl");cl()};
+<<<<<<< HEAD
+$("#fi").onchange=e=>{importFiles([...e.target.files]);e.target.value=""};
+async function home(){
+ try{if(!(await DB.all("meta")).length){await importRootBooks();}
+  const M=await DB.all("meta"),pr=M.filter(m=>m.pr>0&&m.pr<100);
+  $("#hm").textContent=M.length?M.length+(M.length>1?" books":" book")+(pr.length?", "+pr.length+" in progress":""):"No books yet";
+  const l=M.filter(m=>m.at).sort((a,b)=>b.at-a.at)[0];
+  $("#hr").innerHTML=l?"<b>Continue</b> "+esc(l.title)+'<i><b style="width:'+l.pr+'%"></b></i>':""}catch(e){$("#hm").textContent="Storage unavailable"}}
+async function shelf(){let M=[];try{M=await DB.all("meta")}catch(e){}
+ M.sort((a,b)=>(b.at||b.added)-(a.at||a.added));const el=$("#shelf");
+ if(!M.length){el.innerHTML='<div class="em">Add your first book. Choose one or more .txt files and Stillpoint will tidy them and find the chapters.</div>';return}
+ el.innerHTML=M.map(m=>'<div class="bk"><button class="o" data-o="'+m.id+'"><div class="t">'+esc(m.title)+'</div><div class="s">'+m.n+" chapters, "+m.pr+'% read</div><i><b style="width:'+m.pr+'%"></b></i></button><button class="x" data-x="'+m.id+'">Remove</button></div>').join("");
+ el.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>openBook(b.dataset.o));
+ el.querySelectorAll("[data-x]").forEach(b=>b.onclick=async()=>{if(!confirm("Remove this book and its highlights?"))return;
+  const id=b.dataset.x;await DB.del("meta",id);await DB.del("text",id);for(const k of (await DB.all("marks")).filter(k=>k.b===id))await DB.del("marks",k.id);shelf()})}
+/* reader */
+let B=null;
+async function openBook(id){const[m,t,k]=await Promise.all([DB.get("meta",id),DB.get("text",id),DB.all("marks")]);
+ B={m,c:t.ch,i:m.i||0,k:k.filter(x=>x.b===id)};show("read");$("#read").classList.remove("hide");render(m.y||0)}
+function para(p,i,pi){const ms=B.k.filter(k=>k.ch===i&&k.pi===pi).sort((a,b)=>a.s-b.s);let o="",x=0;
+ for(const k of ms){if(k.s<x)continue;o+=esc(p.slice(x,k.s))+'<mark data-k="'+k.id+'">'+esc(p.slice(k.s,k.e))+"</mark>";x=k.e}return o+esc(p.slice(x))}
+function render(y){const c=B.c[B.i];
+ $("#tx").innerHTML="<h2>"+esc(c.t)+"</h2>"+c.p.map((p,pi)=>'<p data-p="'+pi+'">'+para(p,B.i,pi)+"</p>").join("")+
+  '<div class="nv"><button data-n="-1"'+(B.i?"":" hidden")+'>Previous chapter</button><button data-n="1"'+(B.i<B.c.length-1?"":" hidden")+">Next chapter</button></div>";
+ $("#ct").textContent=c.t;$("#tx").querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{B.i+=+b.dataset.n;render(0)});
+ $("#tx").querySelectorAll("mark").forEach(m=>m.onclick=async e=>{e.stopPropagation();if(!confirm("Remove this highlight?"))return;await DB.del("marks",m.dataset.k);B.k=B.k.filter(k=>k.id!==m.dataset.k);render(rd.scrollTop/(rd.scrollHeight-rd.clientHeight||1))});
+ const rd=$("#rd");requestAnimationFrame(()=>{rd.scrollTop=y*(rd.scrollHeight-rd.clientHeight);prog()})}
+=======
+$("#fi").onclick=async()=>{
+ if(window.showDirectoryPicker){try{const h=await showDirectoryPicker({mode:"read"});await DB.put("kv",{id:"dir",handle:h});$("#frs").hidden=false;return ingestRoot(h)}catch(e){if(e&&e.name==="AbortError")return}}
+ $("#fd2").click()};
+$("#fd2").onchange=e=>{const f=[...e.target.files];e.target.value="";ingestFiles(f)};
+$("#frs").onclick=async()=>{const r=await DB.get("kv","dir").catch(()=>null);
+ if(!r||!r.handle)return toast("No folder saved. Use Add books folder first.");
+ if(!await dirPerm(r.handle))return toast("Allow access to that folder to rescan.");
+ ingestRoot(r.handle)};
+DB.get("kv","dir").then(r=>{if(r&&r.handle)$("#frs").hidden=false}).catch(()=>{});
+$("#iv").onclick=()=>{const iv=$("#iv");iv.classList.remove("on");iv.querySelector("img").removeAttribute("src")};
+async function home(){try{const M=await DB.all("meta"),pr=M.filter(m=>m.pr>0&&m.pr<100);
+ $("#hm").textContent=M.length?M.length+(M.length>1?" books":" book")+(pr.length?", "+pr.length+" in progress":""):"No books yet";
+ const l=M.filter(m=>m.at).sort((a,b)=>b.at-a.at)[0];
+ $("#hr").innerHTML=l?"<b>Continue</b> "+esc(l.title)+'<i><b style="width:'+l.pr+'%"></b></i>':""}catch(e){$("#hm").textContent="Storage unavailable"}}
+async function shelf(){let M=[];try{M=await DB.all("meta")}catch(e){}
+ M.sort((a,b)=>(b.at||b.added)-(a.at||a.added));const el=$("#shelf");
+ if(!M.length){el.innerHTML='<div class="em">Add your first book. Choose your books folder — each book lives in its own folder with book.json, its text and its cover.</div>';return}
+ el.innerHTML=M.map(m=>'<div class="bk"><div class="cv" data-cv="'+m.id+'"><span>No cover</span></div><button class="o" data-o="'+m.id+'"><div class="t">'+esc(m.title)+'</div><div class="s">'+(m.author?esc(m.author)+", ":"")+m.n+" chapters, "+m.pr+'% read</div><i><b style="width:'+m.pr+'%"></b></i></button><button class="x" data-x="'+m.id+'">Remove</button></div>').join("");
+ el.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>openBook(b.dataset.o));
+ el.querySelectorAll("[data-x]").forEach(b=>b.onclick=async()=>{if(!confirm("Remove this book and its highlights?"))return;
+  const id=b.dataset.x;await DB.del("meta",id);await DB.del("text",id);for(const k of (await DB.all("marks")).filter(k=>k.b===id))await DB.del("marks",k.id);
+  for(const r of (await DB.all("blob").catch(()=>[])).filter(r=>String(r.id).indexOf(id+"/")===0))await DB.del("blob",r.id);
+  for(const k of [...urls.keys()])if(k.indexOf(id+"/")===0){URL.revokeObjectURL(urls.get(k));urls.delete(k)}
+  shelf()});
+ covers(M)}
+async function covers(M){for(const m of M){const cell=document.querySelector('#shelf .cv[data-cv="'+m.id+'"]');if(!cell)continue;
+ let rec=null;try{rec=await DB.get("blob",m.id+"/thumb")||await DB.get("blob",m.id+"/cover")}catch(e){}
+ if(!rec||!rec.blob)continue;
+ cell.innerHTML='<img alt="" loading="lazy" src="'+getUrl(m.id+"/thumb",rec.blob)+'">'}}
+/* reader */
+let B=null;
+async function openBook(id){let m,t,k;try{[m,t,k]=await Promise.all([DB.get("meta",id),DB.get("text",id),DB.all("marks")])}catch(e){return toast("Storage is busy. Close other Stillpoint tabs and try again.")}
+ if(!m||!t||!t.ch||!t.ch.length)return toast("That book is missing from the library.");
+ B={m,c:t.ch,i:Math.min(m.i||0,t.ch.length-1),k:k.filter(x=>x.b===id)};show("read");$("#read").classList.remove("hide");render(m.y||0)}
+function para(p,i,pi){const ms=B.k.filter(k=>k.ch===i&&k.pi===pi).sort((a,b)=>a.s-b.s);let o="",x=0;
+ for(const k of ms){if(k.s<x)continue;o+=esc(p.slice(x,k.s))+'<mark data-k="'+k.id+'">'+esc(p.slice(k.s,k.e))+"</mark>";x=k.e}return o+esc(p.slice(x))}
+function figHtml(pi){const c=B.c[B.i];return (c.imgs||[]).filter(x=>x.pi===pi).map(x=>{
+ const r=x.width&&x.height?' style="aspect-ratio:'+x.width+"/"+x.height+'"':"";
+ return '<figure class="fig" data-load="'+x.id+'" data-cap="'+esc(x.caption||"").replace(/"/g,"&quot;")+'"'+r+'><div class="ph"></div>'+(x.caption?"<figcaption>"+esc(x.caption)+"</figcaption>":"")+"</figure>"}).join("")}
+async function fillFig(f){if(f.dataset.done)return;f.dataset.done="1";
+ let rec=null;try{rec=await DB.get("blob",B.m.id+"/"+f.dataset.load)}catch(e){}
+ if(!rec||!rec.blob){f.innerHTML='<div class="na">Image unavailable'+(f.dataset.cap?": "+esc(f.dataset.cap):"")+"</div>";return}
+ const u=getUrl(B.m.id+"/"+f.dataset.load,rec.blob);
+ f.innerHTML='<img alt="" src="'+u+'" loading="lazy">'+(f.dataset.cap?"<figcaption>"+esc(f.dataset.cap)+"</figcaption>":"");
+ f.onclick=()=>{const iv=$("#iv");iv.querySelector("img").src=u;iv.classList.add("on")}}
+function hydrate(){const fs=[...document.querySelectorAll("#tx figure.fig[data-load]")];if(!fs.length)return;
+ if(IO)IO.disconnect();
+ IO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){IO.unobserve(e.target);fillFig(e.target)}}),{root:$("#rd"),rootMargin:"500px"});
+ fs.forEach(f=>IO.observe(f))}
+function render(y){const c=B.c[B.i];
+ $("#tx").innerHTML="<h2>"+esc(c.t)+"</h2>"+figHtml(0)+c.p.map((p,pi)=>'<p data-p="'+pi+'">'+para(p,B.i,pi)+"</p>"+figHtml(pi+1)).join("")+
+  '<div class="nv"><button data-n="-1"'+(B.i?"":" hidden")+'>Previous chapter</button><button data-n="1"'+(B.i<B.c.length-1?"":" hidden")+">Next chapter</button></div>";
+ $("#ct").textContent=c.t;$("#tx").querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{B.i+=+b.dataset.n;render(0)});
+ $("#tx").querySelectorAll("mark").forEach(m=>m.onclick=async e=>{e.stopPropagation();if(!confirm("Remove this highlight?"))return;await DB.del("marks",m.dataset.k);B.k=B.k.filter(k=>k.id!==m.dataset.k);render(rd.scrollTop/(rd.scrollHeight-rd.clientHeight||1))});
+ const rd=$("#rd");requestAnimationFrame(()=>{rd.scrollTop=y*(rd.scrollHeight-rd.clientHeight);prog();hydrate()})}
+>>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
+let sv;const rd=$("#rd");
+function prog(){if(!B)return;const f=rd.scrollTop/(rd.scrollHeight-rd.clientHeight||1),p=Math.min(100,Math.round((B.i+f)/B.c.length*100));
+ $("#pg").style.width=p+"%";clearTimeout(sv);const bk=B;sv=setTimeout(()=>{if(!bk)return;Object.assign(bk.m,{i:bk.i,y:f,pr:p,at:Date.now()});DB.put("meta",bk.m).catch(()=>{})},400)}
+rd.onscroll=prog;
+$("#rd").onclick=()=>{if(!getSelection().toString())$("#read").classList.toggle("hide")};
+$("#br").onclick=()=>{stopT();B=null;show("lib");shelf()};
+function goto(i,pi){B.i=i;render(0);if(pi!=null){const p=$('#tx [data-p="'+pi+'"]');if(p)rd.scrollTop=p.offsetTop-90}}
+/* highlight selection */
+document.addEventListener("selectionchange",()=>{const s=getSelection(),ok=B&&s.rangeCount&&!s.isCollapsed&&$("#tx").contains(s.anchorNode);$("#hb").style.display=ok?"block":"none"});
+$("#hb").onpointerdown=e=>e.preventDefault();
+$("#hb").onclick=async()=>{const s=getSelection(),r=s.getRangeAt(0),p=(r.startContainer.nodeType===3?r.startContainer.parentElement:r.startContainer).closest("[data-p]");if(!p)return;
+ const pre=document.createRange();pre.selectNodeContents(p);pre.setEnd(r.startContainer,r.startOffset);const a=pre.toString().length,
+ e=p.contains(r.endContainer)?a+r.toString().length:p.textContent.length,pi=+p.dataset.p,k={id:"k"+Date.now(),b:B.m.id,ch:B.i,pi,s:a,e,text:B.c[B.i].p[pi].slice(a,e)};
+ await DB.put("marks",k);B.k.push(k);s.removeAllRanges();render(rd.scrollTop/(rd.scrollHeight-rd.clientHeight||1))};
+/* sheets */
+const sheet=h=>{$("#sc").innerHTML=h;$("#sh").classList.add("on")};$("#sh").onclick=e=>{if(e.target.id==="sh")$("#sh").classList.remove("on")};
+$("#bc").onclick=()=>{sheet("<h3>Contents</h3>"+B.c.map((c,i)=>'<button class="li'+(i===B.i?" cur":"")+'" data-g="'+i+'">'+esc(c.t)+"</button>").join(""));
+ $("#sc").querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{$("#sh").classList.remove("on");goto(+b.dataset.g)})};
+$("#bn").onclick=()=>{sheet("<h3>Highlights</h3>"+(B.k.length?B.k.map(k=>'<button class="li" data-g="'+k.id+'">'+esc(k.text.slice(0,140))+"<small>"+esc(B.c[k.ch].t)+"</small></button>").join(""):'<div class="em" style="padding:20px 0">Select text while reading, then tap Highlight.</div>'));
+ $("#sc").querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{const k=B.k.find(x=>x.id===b.dataset.g);$("#sh").classList.remove("on");goto(k.ch,k.pi)})};
+$("#bs").onclick=()=>{sheet('<h3>Search this book</h3><input id="q" type="search" placeholder="Word or phrase" autocomplete="off"><div id="qr"></div>');const q=$("#q");q.focus();
+ q.oninput=()=>{const t=q.value.trim().toLowerCase(),o=[];if(t.length>1)B.c.forEach((c,i)=>c.p.forEach((p,pi)=>{const j=p.toLowerCase().indexOf(t);if(j>-1&&o.length<40)o.push([i,pi,p.slice(Math.max(0,j-40),j+90)])}));
+  $("#qr").innerHTML=o.length?o.map((r,n)=>'<button class="li" data-r="'+n+'">…'+esc(r[2])+"…<small>"+esc(B.c[r[0]].t)+"</small></button>").join(""):(t.length>1?'<div class="em" style="padding:16px 0">Nothing found.</div>':"");
+  $("#qr").querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{const r=o[+b.dataset.r];$("#sh").classList.remove("on");goto(r[0],r[1])})}};
+$("#ba").onclick=()=>{const row=(l,k,opts)=>'<div class="st"><span>'+l+"</span><div>"+opts.map(([t,v])=>'<button data-k="'+k+'" data-v="'+v+'"'+(String(S[k])===String(v)?' class="on"':"")+">"+t+"</button>").join("")+"</div></div>";
+ sheet("<h3>Reading</h3>"+row("Text size","fs",[["Smaller",S.fs-1],["Larger",S.fs+1]]).replace(/ class="on"/g,"")+row("Line spacing","lh",[["Snug",1.5],["Even",1.65],["Open",1.85]])+
+  row("Typeface","rf",[["Literata","serif"],["Newsreader","news"],["System","sys"]])+row("Theme","th",[["Paper","light"],["Sepia","sepia"],["Night","dark"]]));
+ $("#sc").querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{const k=b.dataset.k,v=b.dataset.v;
+  if(k==="fs"){S.fs=Math.max(14,Math.min(30,S.fs+(b.textContent==="Larger"?1:-1)))}else{S[k]=k==="lh"?+v:v;b.parentElement.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b))}
+  applySet()})};
+/* clients: separate store, every record encrypted with a key made from the PIN */
+let K=null,CL=[],SE=[],TP=[],PY=[],idle,V={m:"list"};
+const TE=new TextEncoder(),TD=new TextDecoder(),b64=b=>{let s="";for(const x of new Uint8Array(b))s+=String.fromCharCode(x);return btoa(s)},ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const CD=(()=>{let p;const open=()=>p||(p=new Promise((res,rej)=>{const r=indexedDB.open("stillpoint-clients",1);r.onupgradeneeded=()=>["cfg","rec"].forEach(n=>r.result.createObjectStore(n,{keyPath:"id"}));r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}));
+ const tx=async(s,m,f)=>{const d=await open();return new Promise((res,rej)=>{const t=d.transaction(s,m);const o=f(t);t.oncomplete=()=>res(o&&o.result);t.onerror=()=>rej(t.error)})};
+ return{all:s=>tx(s,"readonly",t=>t.objectStore(s).getAll()),get:(s,k)=>tx(s,"readonly",t=>t.objectStore(s).get(k)),put:(s,v)=>tx(s,"readwrite",t=>{t.objectStore(s).put(v)}),del:(s,k)=>tx(s,"readwrite",t=>{t.objectStore(s).delete(k)})}})();
+const keyFrom=async(pin,salt)=>{const m=await crypto.subtle.importKey("raw",TE.encode(pin),"PBKDF2",false,["deriveKey"]);return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:250000,hash:"SHA-256"},m,{name:"AES-GCM",length:256},false,["encrypt","decrypt"])};
+const seal=async o=>{const iv=crypto.getRandomValues(new Uint8Array(12));return{iv:b64(iv),ct:b64(await crypto.subtle.encrypt({name:"AES-GCM",iv},K,TE.encode(JSON.stringify(o))))}};
+const unseal=async r=>JSON.parse(TD.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub(r.iv)},K,ub(r.ct))));
+const save=async o=>{await CD.put("rec",{id:o.id,...await seal(o)})};
+async function unlock(pin,first){
+ if(first){const salt=crypto.getRandomValues(new Uint8Array(16));K=await keyFrom(pin,salt);await CD.put("cfg",{id:"cfg",salt:b64(salt),...await seal({ok:"stillpoint"})})}
+ else{const cfg=await CD.get("cfg","cfg");K=await keyFrom(pin,ub(cfg.salt));try{if((await unseal(cfg)).ok!=="stillpoint")throw 0}catch(e){K=null;return false}}
+ const all=await Promise.all((await CD.all("rec")).map(unseal));CL=all.filter(x=>x.t==="c");SE=all.filter(x=>x.t==="s");TP=all.filter(x=>x.t==="t");PY=all.filter(x=>x.t==="p");arm();return true}
+const arm=()=>{clearTimeout(idle);if(K)idle=setTimeout(lockCl,240000)};
+["pointerdown","keydown","scroll"].forEach(e=>addEventListener(e,()=>{if(K)arm()},true));
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&K)lockCl()});
+function lockCl(){const was=K;K=null;CL=[];SE=[];TP=[];PY=[];clearTimeout(idle);if(was&&$("#cl").classList.contains("on")){V={m:"list"};cl()}}
+const fd=d=>new Date(d+"T12:00").toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
+const CHIPS=["Slow rhythm","Strong rhythm","Occipital tension","Softening at the sacrum","Dural drag","Stillpoint","Held breath"];
+function cl(){$("#cf").style.display=K&&V.m==="list"?"flex":"none";if(!K)return lockScreen();({list:listView,client:clientView,sess:sessView,rem:remView})[V.m]()}
+async function lockScreen(){let cfg;const b=$("#cb");
+ try{cfg=await CD.get("cfg","cfg")}catch(e){b.innerHTML='<div class="pn"><p>Storage is not available in this browser.</p></div>';return}
+ const first=!cfg;
+ b.innerHTML='<div class="hd" style="padding:18px 0 0"><button class="lk" id="h2">Home</button></div><div class="pn" style="margin-top:10vh"><h2>Clients</h2><p>'+(first?"Choose a PIN of 4 to 6 digits. It protects your client notes on this device. If you forget it, the notes cannot be recovered.":"Enter your PIN.")+'</p><input id="pi" type="password" inputmode="numeric" maxlength="6" autocomplete="off" aria-label="PIN">'+(first?'<input id="p2" type="password" inputmode="numeric" maxlength="6" placeholder="Repeat" autocomplete="off" aria-label="Repeat PIN">':"")+'<div id="pe" class="er"></div><button class="pb" id="pgo" style="margin-top:4px">'+(first?"Set PIN":"Unlock")+"</button></div>";
+ $("#h2").onclick=()=>show("home");
+ CD.get("cfg","bio").then(bio=>{if(!bio||!navigator.credentials)return;$("#pgo").insertAdjacentHTML("afterend",'<button class="lk" id="bio" style="align-self:center;margin-top:6px">Use fingerprint or Face ID</button>');
+  $("#bio").onclick=async()=>{try{const k=await prfKey(bio.cid,bio.salt),pin=TD.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub(bio.iv)},k,ub(bio.ct)));
+   if(await unlock(pin,false)){V={m:"list"};cl()}else{await CD.del("cfg","bio");$("#bio").remove();$("#pe").textContent="Biometric unlock is out of date. Use your PIN."}}catch(x){$("#pe").textContent="Could not use biometrics. Use your PIN."}}}).catch(()=>{});
+ const go=async()=>{const p=$("#pi").value,e=$("#pe");e.textContent="";if(!/^\d{4,6}$/.test(p))return e.textContent="Use 4 to 6 digits.";if(first&&p!==$("#p2").value)return e.textContent="The two PINs do not match.";
+  try{if(await unlock(p,first)){V={m:"list"};cl();if(first)showPhrase(await setRecovery(p))}else{e.textContent="That PIN is not correct.";$("#pi").value=""}}catch(x){e.textContent="This browser could not unlock the store."}};
+ $("#pgo").onclick=go;if(!first)CD.get("cfg","rec").then(r=>{if(r){$("#pgo").insertAdjacentHTML("afterend",'<button class="lk" id="fg" style="align-self:center">Forgot PIN?</button>');$("#fg").onclick=forgot}}).catch(()=>{});b.querySelectorAll("input").forEach(i=>i.onkeydown=e=>{if(e.key==="Enter")go()});$("#pi").focus()}
+function listView(){
+ const rows=[...CL].sort((a,b)=>a.name.localeCompare(b.name)).map(c=>{const s=SE.filter(x=>x.cid===c.id).sort((a,b)=>b.date.localeCompare(a.date));
+  return '<button class="li" data-c="'+c.id+'"><span class="ti">'+esc(c.name)+"</span><small>"+(s.length?s.length+(s.length>1?" sessions, last ":" session, last ")+fd(s[0].date):"No sessions yet")+"</small></button>"}).join("");
+ $("#cb").innerHTML='<div class="hd" style="padding:18px 0 10px"><button class="lk" id="ch">Home</button><h1>Clients</h1><button class="lk" id="ca">Add client</button></div>'+(rows||'<div class="em">No clients yet. Add one using initials or a first name only.</div>');
+ $("#ch").onclick=()=>show("home");$("#ca").onclick=addClient;
+ $("#cb").querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{V={m:"client",id:b.dataset.c};cl()})}
+function addClient(){
+ sheet('<h3>New client</h3><div class="fl"><label for="n1">Initials or first name</label><input class="in" id="n1" maxlength="30" autocomplete="off"></div><div class="fl"><label for="n2">Goals</label><textarea class="in" id="n2" rows="2"></textarea></div><div class="fl"><label for="n3">Contraindications</label><textarea class="in" id="n3" rows="2"></textarea></div><button class="pb" id="ns">Save client</button>');
+ $("#ns").onclick=async()=>{const n=$("#n1").value.trim();if(!n)return $("#n1").focus();const c={t:"c",id:"c"+Date.now(),name:n,goals:$("#n2").value.trim(),contra:$("#n3").value.trim()};await save(c);CL.push(c);$("#sh").classList.remove("on");V={m:"client",id:c.id};cl()}}
+function clientView(){const c=CL.find(x=>x.id===V.id);if(!c){V={m:"list"};return cl()}
+ const s=SE.filter(x=>x.cid===c.id).sort((a,b)=>b.date.localeCompare(a.date));
+ $("#cb").innerHTML='<div class="hd" style="padding:18px 0 10px"><button class="lk" id="cbk">Clients</button></div><h1 class="ti" style="font-size:40px">'+esc(c.name)+'</h1><div class="fl"><label for="g1">Goals</label><textarea class="in" id="g1" rows="2">'+esc(c.goals)+'</textarea></div><div class="fl"><label for="g2">Contraindications</label><textarea class="in" id="g2" rows="2">'+esc(c.contra)+'</textarea></div><button class="pb" id="ns">New session</button><div style="margin-top:26px">'+(s.map(x=>'<button class="li" data-s="'+x.id+'">'+fd(x.date)+"<small>"+esc((x.intention||x.said||"No notes").slice(0,90))+"</small></button>").join("")||'<div class="dg">No sessions yet.</div>')+'</div><button class="lk" id="dc" style="margin-top:30px;color:var(--soft)">Delete client and all sessions</button>';
+ $("#cbk").onclick=()=>{V={m:"list"};cl()};
+ ["g1","g2"].forEach((id,i)=>$("#"+id).onchange=async e=>{c[i?"contra":"goals"]=e.target.value.trim();await save(c)});
+ $("#ns").onclick=()=>{V={m:"sess",id:c.id,sid:null};cl()};
+ $("#cb").querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{V={m:"sess",id:c.id,sid:b.dataset.s};cl()});
+ $("#dc").onclick=async()=>{if(!confirm("Delete this client and all sessions?"))return;for(const x of [c,...s])await CD.del("rec",x.id);CL=CL.filter(x=>x!==c);SE=SE.filter(x=>x.cid!==c.id);V={m:"list"};cl()}}
+function sessView(){const c=CL.find(x=>x.id===V.id),o=SE.find(x=>x.id===V.sid)||{date:new Date().toLocaleDateString("en-CA"),intention:"",chips:[],notes:"",said:"",follow:""},on=new Set(o.chips);
+ $("#cb").innerHTML='<div class="hd" style="padding:18px 0 10px"><button class="lk" id="cbk">'+esc(c.name)+'</button></div><div class="fl"><label for="sd">Date</label><input class="in" id="sd" type="date" value="'+o.date+'"></div><div class="fl"><label for="si">Intention</label><textarea class="in" id="si" rows="2">'+esc(o.intention)+'</textarea></div><div class="fl"><label>What I noticed</label><div class="chips" id="chp">'+CHIPS.map(x=>'<button class="cp'+(on.has(x)?" on":"")+'" aria-pressed="'+on.has(x)+'">'+x+"</button>").join("")+'</div></div><div class="fl"><label>Body map</label><div id="bm"></div></div><div class="fl"><label for="sn">More detail</label><textarea class="in" id="sn" rows="3">'+esc(o.notes)+'</textarea></div><div class="fl"><label for="sa">Client said</label><textarea class="in" id="sa" rows="2">'+esc(o.said)+'</textarea></div><div class="fl"><label for="sf">Follow up</label><input class="in" id="sf" value="'+esc(o.follow).replace(/"/g,"&quot;")+'"></div><div class="fl"><label for="sfd">Follow-up date</label><input class="in" id="sfd" type="date" value="'+(o.fdate||"")+'"></div><button class="pb" id="ss">Save session</button>'+(V.sid?'<button class="lk" id="sx" style="margin-top:22px;color:var(--soft)">Delete session</button>':"");
+ const back=()=>{V={m:"client",id:c.id};cl()};$("#cbk").onclick=back;
+ $("#chp").querySelectorAll(".cp").forEach(b=>b.onclick=()=>{b.classList.toggle("on");b.setAttribute("aria-pressed",b.classList.contains("on"))});
+ $("#ss").onclick=async()=>{const s={t:"s",id:o.id||"s"+Date.now(),cid:c.id,date:$("#sd").value||o.date,intention:$("#si").value.trim(),chips:[...document.querySelectorAll("#chp .cp.on")].map(x=>x.textContent),notes:$("#sn").value.trim(),said:$("#sa").value.trim(),follow:$("#sf").value.trim(),fdate:$("#sfd").value,map:[...MP]};await save(s);SE=SE.filter(x=>x.id!==s.id);SE.push(s);back();toast("Session saved.")};
+ if(V.sid)$("#sx").onclick=async()=>{if(!confirm("Delete this session?"))return;await CD.del("rec",V.sid);SE=SE.filter(x=>x.id!==V.sid);back()}}
+/* backups: plain files you keep; client backups stay encrypted with your PIN */
+async function saveFile(name,data){try{const b=data instanceof Blob?data:new Blob([data],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);toast("Saved to your downloads.")}catch(e){toast("Could not save the file.")}}
+const stamp=()=>new Date().toLocaleDateString("en-CA");
+<<<<<<< HEAD
+$("#lb").onclick=async()=>{try{toast("Preparing backup…");const[meta,text,marks]=await Promise.all([DB.all("meta"),DB.all("text"),DB.all("marks")]);
+ saveFile("stillpoint-library-"+stamp()+".json",new Blob([JSON.stringify({app:"stillpoint",kind:"library",v:1,meta,text,marks})],{type:"application/json"}))}catch(e){toast("Could not read the library.")}};
+$("#lr").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
+ try{const j=JSON.parse(await f.text());if(j.app!=="stillpoint"||j.kind!=="library")throw 0;toast("Restoring…");
+  for(const s of["meta","text","marks"])for(const r of j[s])await DB.put(s,r);toast("Library restored.");shelf()}catch(x){toast("That is not a Stillpoint library backup.")}};
+=======
+const b64Of=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(",")[1]||"");r.onerror=()=>rej(r.error);r.readAsDataURL(b)});
+const fromB64=(d,t)=>{const s=atob(d),a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);return new Blob([a],{type:t||"application/octet-stream"})};
+$("#lb").onclick=async()=>{try{toast("Preparing backup…");const[meta,text,marks,bl]=await Promise.all([DB.all("meta"),DB.all("text"),DB.all("marks"),DB.all("blob")]);
+ const total=bl.reduce((a,r)=>a+((r.blob&&r.blob.size)||0),0);
+ if(total>120*1024*1024&&!confirm("This library holds "+Math.round(total/1048576)+" MB of covers and figures. The backup file will be large and slow to write. Continue?"))return;
+ const blobs=[];
+ for(const r of bl){if(!r.blob)continue;blobs.push({id:r.id,type:r.blob.type||"",data:await b64Of(r.blob)})}
+ saveFile("stillpoint-library-"+stamp()+".json",new Blob([JSON.stringify({app:"stillpoint",kind:"library",v:2,meta,text,marks,blobs})],{type:"application/json"}))}catch(e){toast("Could not read the library.")}};
+$("#lr").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
+ try{const j=JSON.parse(await f.text());if(j.app!=="stillpoint"||j.kind!=="library")throw 0;toast("Restoring…");
+  for(const s of["meta","text","marks"])for(const r of (j[s]||[]))await DB.put(s,r);
+  for(const b of (j.blobs||[]))if(b&&b.id&&b.data)await DB.put("blob",{id:b.id,blob:fromB64(b.data,b.type)});
+  toast("Library restored.");shelf()}catch(x){toast("That is not a Stillpoint library backup.")}};
+>>>>>>> 26fb1bc3e48f9877eaa3b56c5f3942d799c4aa00
+$("#cbu").onclick=async()=>{try{const[cfg,rec]=await Promise.all([CD.get("cfg","cfg"),CD.all("rec")]);saveFile("stillpoint-clients-"+stamp()+".json",JSON.stringify({app:"stillpoint",kind:"clients",v:1,cfg,rec}))}catch(e){toast("Could not read the clients.")}};
+$("#crs").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
+ try{const j=JSON.parse(await f.text());if(j.app!=="stillpoint"||j.kind!=="clients"||!j.cfg)throw 0;
+  if(!confirm("Restoring replaces all clients on this device with the backup. Continue?"))return;
+  for(const r of await CD.all("rec"))await CD.del("rec",r.id);await CD.put("cfg",j.cfg);for(const r of j.rec)await CD.put("rec",r);
+  toast("Restored. Enter the PIN you used when the backup was made.");lockCl()}catch(x){toast("That is not a Stillpoint clients backup.")}};
+/* search across every book: scans one book at a time, results appear as they are found */
+let gs=0;
+async function gsearch(q){const t=q.trim().toLowerCase(),id=++gs,gr=$("#gr"),sh=$("#shelf");
+ if(t.length<2){gr.hidden=true;sh.hidden=false;return}
+ sh.hidden=true;gr.hidden=false;gr.innerHTML='<div class="dg" id="gp">Searching…</div><div id="gl"></div>';
+ let M=[];try{M=(await DB.all("meta")).sort((a,b)=>a.title.localeCompare(b.title))}catch(e){}
+ let total=0,books=0;
+ for(let n=0;n<M.length&&gs===id&&total<200;n++){const m=M[n],gp=$("#gp");if(gp)gp.textContent="Searching book "+(n+1)+" of "+M.length+"…";
+  let tx;try{tx=await DB.get("text",m.id)}catch(e){continue}if(!tx||gs!==id)continue;const hits=[];
+  tx.ch.forEach((c,ci)=>c.p.forEach((p,pi)=>{if(hits.length>=8)return;const j=p.toLowerCase().indexOf(t);if(j>-1)hits.push([ci,pi,p.slice(Math.max(0,j-50),j),p.slice(j,j+t.length),p.slice(j+t.length,j+t.length+90),c.t])}));
+  if(hits.length){total+=hits.length;books++;const gl=$("#gl");if(gl)gl.insertAdjacentHTML("beforeend",'<div class="ti" style="margin-top:20px">'+esc(m.title)+"</div>"+hits.map(h=>'<button class="li" data-b="'+m.id+'" data-c="'+h[0]+'" data-p="'+h[1]+'">…'+esc(h[2])+"<mark>"+esc(h[3])+"</mark>"+esc(h[4])+"…<small>"+esc(h[5])+"</small></button>").join(""))}}
+ if(gs===id){const gp=$("#gp");if(gp)gp.textContent=total?"Found "+total+(total>1?" passages":" passage")+" in "+books+(books>1?" books.":" book.")+(total>=200?" Showing the first 200.":""):"Nothing found."}}
+$("#gr").onclick=async e=>{const b=e.target.closest("[data-b]");if(!b)return;await openBook(b.dataset.b);goto(+b.dataset.c,+b.dataset.p)};
+$("#gq").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();e.target.blur();gsearch(e.target.value)}};
+$("#gq").oninput=e=>{if(!e.target.value.trim())gsearch("")};
+/* bookmarks: kept with the book, so they travel in the library backup */
+const topP=()=>{const ps=[...document.querySelectorAll("#tx p[data-p]")];return ps.find(p=>p.offsetTop+p.offsetHeight>rd.scrollTop+100)||ps[0]};
+const saveM=()=>DB.put("meta",B.m).catch(()=>{});
+function marks(){const bm=B.m.bm||(B.m.bm=[]);
+ sheet('<h3>Bookmarks</h3><button class="pb" id="ba2" style="margin:0 0 10px">Bookmark this spot</button>'+(bm.length?bm.map((x,n)=>'<div class="st"><button class="li" style="border:0;padding:0" data-g="'+n+'">'+esc(x.text)+"<small>"+esc(B.c[x.ch].t)+'</small></button><button data-d="'+n+'">Remove</button></div>').join(""):'<div class="dg">No bookmarks yet.</div>'));
+ $("#ba2").onclick=()=>{const p=topP();if(!p)return;const pi=+p.dataset.p;if(!bm.some(x=>x.ch===B.i&&x.pi===pi))bm.push({ch:B.i,pi,text:B.c[B.i].p[pi].slice(0,110)});saveM();marks()};
+ $("#sc").querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{const x=bm[+b.dataset.g];$("#sh").classList.remove("on");goto(x.ch,x.pi)});
+ $("#sc").querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{bm.splice(+b.dataset.d,1);saveM();marks()})}
+$("#bk").onclick=marks;
+/* read aloud: one paragraph at a time, continues into the next chapter */
+let T=0;const syn=window.speechSynthesis,SPD=[.85,1,1.15,1.3];
+function stopT(){T=0;if(syn)syn.cancel();document.querySelectorAll("#tx p.sp").forEach(p=>p.classList.remove("sp"));$("#bl").textContent="Listen"}
+function speak(pi){const c=B&&B.c[B.i];if(!T||!c)return;
+ if(pi>=c.p.length){if(B.i<B.c.length-1){B.i++;render(0);return speak(0)}return stopT()}
+ const ps=document.querySelectorAll("#tx p[data-p]");ps.forEach(p=>p.classList.remove("sp"));const el=ps[pi];if(el){el.classList.add("sp");rd.scrollTop=Math.max(0,el.offsetTop-120)}
+ const u=new SpeechSynthesisUtterance(c.p[pi]);u.rate=S.sr||1;u.onend=()=>{if(T)speak(pi+1)};u.onerror=()=>{if(T)stopT()};syn.speak(u)}
+$("#bl").onclick=()=>{if(!syn)return toast("Read aloud is not available in this browser.");if(T)return stopT();const p=topP();T=1;$("#bl").textContent="Stop";syn.cancel();speak(p?+p.dataset.p:0)};
+$("#bz").textContent=(S.sr||1)+"×";
+$("#bz").onclick=()=>{S.sr=SPD[(SPD.indexOf(S.sr||1)+1)%SPD.length];$("#bz").textContent=S.sr+"×";applySet()};
+/* fingerprint or Face ID: a passkey on this phone unlocks a stored copy of the PIN; the PIN always still works */
+const rnd=n=>crypto.getRandomValues(new Uint8Array(n));
+async function prfKey(cid,salt){const a=await navigator.credentials.get({publicKey:{challenge:rnd(32),allowCredentials:[{type:"public-key",id:ub(cid)}],userVerification:"required",extensions:{prf:{eval:{first:ub(salt)}}}}});
+ const x=a.getClientExtensionResults().prf,r=x&&x.results;if(!r||!r.first)throw new Error("prf");
+ return crypto.subtle.importKey("raw",r.first,"AES-GCM",false,["encrypt","decrypt"])}
+function bioOn(){
+ sheet('<h3>Biometric unlock</h3><p class="dg" style="padding-top:0">Enter your PIN once to link it to this phone. The PIN still works as a fallback.</p><input class="in" id="bp" type="password" inputmode="numeric" maxlength="6" aria-label="PIN"><div id="be" class="er"></div><button class="pb" id="bgo">Turn on</button>');
+ $("#bgo").onclick=async()=>{const pin=$("#bp").value,e=$("#be");e.textContent="";
+  try{const cfg=await CD.get("cfg","cfg"),k=await keyFrom(pin,ub(cfg.salt));
+   try{await crypto.subtle.decrypt({name:"AES-GCM",iv:ub(cfg.iv)},k,ub(cfg.ct))}catch(x){return e.textContent="That PIN is not correct."}
+   const salt=rnd(32),cred=await navigator.credentials.create({publicKey:{rp:{name:"Stillpoint"},user:{id:rnd(16),name:"stillpoint",displayName:"Stillpoint"},challenge:rnd(32),pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],authenticatorSelection:{authenticatorAttachment:"platform",userVerification:"required"},extensions:{prf:{}}}}),
+   cid=b64(cred.rawId),pk=await prfKey(cid,b64(salt)),iv=rnd(12),ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},pk,TE.encode(pin));
+   await CD.put("cfg",{id:"bio",cid,salt:b64(salt),iv:b64(iv),ct:b64(ct)});$("#sh").classList.remove("on");toast("Biometric unlock is on.")}
+  catch(x){e.textContent="This phone or viewer does not allow it here. Your PIN still works."}}}
+$("#cbi").onclick=async()=>{if(!navigator.credentials)return toast("Not available in this browser.");
+ const bio=await CD.get("cfg","bio").catch(()=>null);
+ if(bio){if(confirm("Turn off fingerprint or Face ID unlock?")){await CD.del("cfg","bio");toast("Turned off.")}}else bioOn()};
+/* PDF client summary: the PDF library loads only when you export */
+const loadJs=u=>new Promise((res,rej)=>{if(window.jspdf)return res();const s=document.createElement("script");s.src=u;s.onload=res;s.onerror=()=>rej(new Error("load"));document.head.appendChild(s)});
+const _cv=clientView;
+clientView=function(){_cv();const c=CL.find(x=>x.id===V.id);if(!c||!$("#dc"))return;$("#dc").insertAdjacentHTML("beforebegin",'<button class="lk" id="px" style="display:block;margin-top:26px">Export summary as PDF</button>');$("#px").onclick=()=>pdfClient(c)};
+async function pdfClient(c){if(!confirm("This PDF is not encrypted. Keep it somewhere private. Continue?"))return;
+ try{toast("Preparing PDF…");await loadJs("vendor/jspdf.umd.min.js");
+  const d=new jspdf.jsPDF({unit:"pt",format:"a4"}),W=d.internal.pageSize.getWidth(),H=d.internal.pageSize.getHeight(),M=56,mw=W-2*M;let y=M;
+  const txt=(t,f,st,sz,gap)=>{d.setFont(f,st);d.setFontSize(sz);for(const l of d.splitTextToSize(t,mw)){if(y+sz*1.4>H-M){d.addPage();y=M}d.text(l,M,y+sz);y+=sz*1.4}y+=gap||0};
+  txt(c.name,"times","normal",26,2);txt("Client summary, "+fd(stamp()),"helvetica","normal",10,16);d.setDrawColor(180);d.line(M,y-8,W-M,y-8);y+=6;
+  if(c.goals){txt("Goals","helvetica","bold",10,2);txt(c.goals,"times","normal",12,12)}
+  if(c.contra){txt("Contraindications","helvetica","bold",10,2);txt(c.contra,"times","normal",12,12)}
+  const s=SE.filter(x=>x.cid===c.id).sort((a,b)=>a.date.localeCompare(b.date));txt("Sessions ("+s.length+")","helvetica","bold",10,8);
+  for(const x of s){if(y>H-M-90){d.addPage();y=M}txt(fd(x.date),"times","bold",13,2);
+   [["Intention",x.intention],["Noticed",x.chips.join(", ")],["Body map",(x.map||[]).map(id=>ZN[id]).filter(Boolean).join(", ")],["Detail",x.notes],["Client said",x.said],["Follow up",x.follow]].filter(r=>r[1]).forEach(r=>txt(r[0]+": "+r[1],"times","normal",11.5,2));y+=10}
+  await saveFile("stillpoint-"+c.name.replace(/[^\w-]+/g,"-")+"-"+stamp()+".pdf",d.output("blob"))}
+ catch(e){toast("Could not make the PDF.")}}
+/* follow-ups: each client's latest session decides their next follow-up */
+const today=()=>new Date().toLocaleDateString("en-CA");
+function rems(){return CL.map(c=>{const s=SE.filter(x=>x.cid===c.id).sort((a,b)=>b.date.localeCompare(a.date))[0];return s&&s.fdate?{c,s,d:s.fdate}:null}).filter(Boolean).sort((a,b)=>a.d.localeCompare(b.d))}
+function remView(){const A=rems(),t=today(),due=A.filter(r=>r.d<=t),up=A.filter(r=>r.d>t);
+ const row=r=>'<button class="li" data-c="'+r.c.id+'"><span class="ti">'+esc(r.c.name)+"</span>"+fd(r.d)+(r.d<t?", overdue":r.d===t?", today":"")+"<small>"+esc(r.s.follow||"Follow up")+"</small></button>";
+ $("#cb").innerHTML='<div class="hd" style="padding:18px 0 10px"><button class="lk" id="rb">Clients</button><h1>Follow-ups</h1><span></span></div>'+(due.length?'<div class="dg">Due or overdue</div>'+due.map(row).join(""):"")+(up.length?'<div class="dg">Upcoming</div>'+up.map(row).join(""):"")+(A.length?"":'<div class="em">No follow-ups yet. Add a follow-up date when you save a session.</div>');
+ $("#rb").onclick=()=>{V={m:"list"};cl()};$("#cb").querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{V={m:"client",id:b.dataset.c};cl()})}
+const _lv=listView;
+listView=function(){_lv();const A=rems(),due=A.filter(r=>r.d<=today()).length,h=$("#cb .hd");if(!A.length||!h)return;
+ h.insertAdjacentHTML("afterend",'<button class="li" id="rm"><span class="ti">Follow-ups</span><small>'+(due?due+" due or overdue, ":"")+(A.length-due)+" upcoming</small></button>");
+ $("#rm").onclick=()=>{V={m:"rem"};cl()}};
+/* body map: tap areas to mark findings in a session; left and right are the client’s */
+const ZF=[["f-cranium","Cranium",'<ellipse cx="100" cy="30" rx="25" ry="24"/>'],["f-face","Face and jaw",'<ellipse cx="100" cy="56" rx="17" ry="14"/>'],["f-neck","Neck",'<rect x="91" y="70" width="18" height="18" rx="6"/>'],
+ ["f-lsh","Left shoulder",'<ellipse cx="134" cy="100" rx="19" ry="12"/>'],["f-rsh","Right shoulder",'<ellipse cx="66" cy="100" rx="19" ry="12"/>'],["f-chest","Chest",'<rect x="76" y="92" width="48" height="44" rx="14"/>'],
+ ["f-abd","Abdomen",'<rect x="78" y="138" width="44" height="36" rx="12"/>'],["f-pel","Pelvis",'<rect x="74" y="176" width="52" height="30" rx="14"/>'],
+ ["f-larm","Left arm",'<rect x="146" y="108" width="16" height="96" rx="8"/>'],["f-rarm","Right arm",'<rect x="38" y="108" width="16" height="96" rx="8"/>'],
+ ["f-lleg","Left leg",'<rect x="102" y="208" width="22" height="160" rx="10"/>'],["f-rleg","Right leg",'<rect x="76" y="208" width="22" height="160" rx="10"/>']];
+const ZB=[["b-occ","Occiput",'<ellipse cx="100" cy="36" rx="25" ry="30"/>'],["b-neck","Cervical spine",'<rect x="91" y="68" width="18" height="22" rx="6"/>'],
+ ["b-lsh","Left shoulder (back)",'<ellipse cx="66" cy="100" rx="19" ry="12"/>'],["b-rsh","Right shoulder (back)",'<ellipse cx="134" cy="100" rx="19" ry="12"/>'],
+ ["b-up","Upper back",'<rect x="76" y="94" width="48" height="36" rx="12"/>'],["b-mid","Mid back",'<rect x="78" y="132" width="44" height="30" rx="10"/>'],["b-low","Lower back",'<rect x="80" y="164" width="40" height="26" rx="10"/>'],
+ ["b-lhip","Left hip",'<ellipse cx="70" cy="206" rx="14" ry="18"/>'],["b-rhip","Right hip",'<ellipse cx="130" cy="206" rx="14" ry="18"/>'],["b-sac","Sacrum",'<rect x="86" y="192" width="28" height="26" rx="10"/>'],
+ ["b-larm","Left arm (back)",'<rect x="38" y="108" width="16" height="96" rx="8"/>'],["b-rarm","Right arm (back)",'<rect x="146" y="108" width="16" height="96" rx="8"/>'],
+ ["b-lleg","Left leg (back)",'<rect x="76" y="226" width="22" height="142" rx="10"/>'],["b-rleg","Right leg (back)",'<rect x="102" y="226" width="22" height="142" rx="10"/>']];
+const ZN={};[...ZF,...ZB].forEach(z=>ZN[z[0]]=z[1]);
+let MP=new Set(),MV="f";
+function drawMap(){const Z=MV==="f"?ZF:ZB,el=$("#bm");if(!el)return;
+ el.innerHTML='<div style="display:flex;gap:18px;align-items:flex-start"><svg viewBox="30 4 140 368" style="width:150px;flex:none" role="group" aria-label="Body map">'+Z.map(z=>z[2].replace(/^<(\w+)/,(m,t)=>"<"+t+' class="z'+(MP.has(z[0])?" on":"")+'" data-z="'+z[0]+'" role="button" tabindex="0" aria-label="'+z[1]+'" aria-pressed="'+MP.has(z[0])+'"')).join("")+'</svg><div style="min-width:0"><div class="chips" style="margin-top:0"><button class="cp'+(MV==="f"?" on":"")+'" data-v="f">Front</button><button class="cp'+(MV==="b"?" on":"")+'" data-v="b">Back</button></div><div class="dg" style="padding:12px 0 0">'+(MP.size?[...MP].map(id=>esc(ZN[id])).join(", "):"Tap an area to mark it.")+'</div><div class="dg" style="padding:8px 0 0;font-size:12.5px">Left and right are the client’s.</div></div></div>';
+ el.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{MV=b.dataset.v;drawMap()});
+ const tg=t=>{const z=t.closest("[data-z]");if(!z)return;MP.has(z.dataset.z)?MP.delete(z.dataset.z):MP.add(z.dataset.z);drawMap()};
+ el.querySelector("svg").onclick=e=>tg(e.target);el.querySelector("svg").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tg(e.target)}}}
+const _sv=sessView;
+sessView=function(){_sv();const o=SE.find(x=>x.id===V.sid);MP=new Set((o&&o.map)||[]);MV="f";drawMap()};
+/* recovery phrase and PIN change */
+const PH=()=>{const a="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";for(const x of rnd(16))s+=a[x%32];return s.match(/.{4}/g).join("-")};
+const recKey=(ph,salt)=>keyFrom(ph.replace(/[^A-Za-z0-9]/g,"").toUpperCase(),salt);
+async function setRecovery(pin){const ph=PH(),salt=rnd(16),k=await recKey(ph,salt),iv=rnd(12);
+ await CD.put("cfg",{id:"rec",salt:b64(salt),iv:b64(iv),ct:b64(await crypto.subtle.encrypt({name:"AES-GCM",iv},k,TE.encode(pin)))});return ph}
+function showPhrase(ph){sheet('<h3>Your recovery phrase</h3><p class="dg" style="padding-top:0">Write this down and keep it somewhere safe, away from your phone. If you forget your PIN, this phrase lets you set a new one without losing client notes. Anyone who has it can open them, and it will not be shown again.</p><div class="ph">'+ph+'</div><button class="pb" id="phd">I have written it down</button>');$("#phd").onclick=()=>$("#sh").classList.remove("on")}
+async function checkPin(pin){try{const c=await CD.get("cfg","cfg"),k=await keyFrom(pin,ub(c.salt));await crypto.subtle.decrypt({name:"AES-GCM",iv:ub(c.iv)},k,ub(c.ct));return true}catch(e){return false}}
+async function rekey(np,ph){const salt=rnd(16);K=await keyFrom(np,salt);
+ for(const x of [...CL,...SE,...TP,...PY])await save(x);
+ await CD.put("cfg",{id:"cfg",salt:b64(salt),...await seal({ok:"stillpoint"})});await CD.del("cfg","bio");
+ if(ph){const rs=rnd(16),rk=await recKey(ph,rs),iv=rnd(12);await CD.put("cfg",{id:"rec",salt:b64(rs),iv:b64(iv),ct:b64(await crypto.subtle.encrypt({name:"AES-GCM",iv},rk,TE.encode(np)))});return ph}
+ return setRecovery(np)}
+function forgot(){sheet('<h3>Reset PIN</h3><p class="dg" style="padding-top:0">Enter your recovery phrase and choose a new PIN. Your client notes stay as they are.</p><input class="in" id="rp" placeholder="XXXX-XXXX-XXXX-XXXX" autocapitalize="characters" autocomplete="off" aria-label="Recovery phrase"><input class="in" id="np" type="password" inputmode="numeric" maxlength="6" placeholder="New PIN, 4 to 6 digits" style="margin-top:14px" aria-label="New PIN"><div id="fe" class="er"></div><button class="pb" id="fgo">Reset PIN</button>');
+ $("#fgo").onclick=async()=>{const ph=$("#rp").value,np=$("#np").value,e=$("#fe");e.textContent="";if(!/^\d{4,6}$/.test(np))return e.textContent="Use 4 to 6 digits for the new PIN.";
+  try{const r=await CD.get("cfg","rec"),k=await recKey(ph,ub(r.salt));let pin;
+   try{pin=TD.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub(r.iv)},k,ub(r.ct)))}catch(x){return e.textContent="That recovery phrase is not correct."}
+   if(!await unlock(pin,false))return e.textContent="Could not unlock with that phrase.";
+   await rekey(np,ph);$("#sh").classList.remove("on");V={m:"list"};cl();toast("PIN changed.")}catch(x){e.textContent="Could not reset on this browser."}}}
+$("#csec").onclick=()=>{sheet('<h3>Recovery and PIN</h3><p class="dg" style="padding-top:0">A recovery phrase lets you reset a forgotten PIN. Enter your current PIN to continue.</p><input class="in" id="op" type="password" inputmode="numeric" maxlength="6" placeholder="Current PIN" aria-label="Current PIN"><input class="in" id="n2p" type="password" inputmode="numeric" maxlength="6" placeholder="New PIN (only to change it)" style="margin-top:14px" aria-label="New PIN"><div id="se" class="er"></div><button class="pb" id="sph" style="margin-top:8px">Create a new recovery phrase</button><button class="pb" id="spc" style="background:none;color:var(--acc);border:1px solid var(--acc);margin-top:10px">Change PIN</button>');
+ const guard=async f=>{const e=$("#se");e.textContent="";const p=$("#op").value;if(!await checkPin(p))return e.textContent="That PIN is not correct.";try{await f(p)}catch(x){e.textContent="That did not work on this browser."}};
+ $("#sph").onclick=()=>guard(async p=>showPhrase(await setRecovery(p)));
+ $("#spc").onclick=()=>guard(async()=>{const n=$("#n2p").value;if(!/^\d{4,6}$/.test(n))return $("#se").textContent="Use 4 to 6 digits for the new PIN.";showPhrase(await rekey(n));toast("PIN changed. Your old recovery phrase no longer works.")})};
+/* session templates */
+const _sv2=sessView;
+sessView=function(){_sv2();const f=$("#cb .fl");if(!f)return;
+ f.insertAdjacentHTML("beforebegin",'<div class="fl" style="margin-top:6px"><label for="tpl">Template</label><select class="in" id="tpl"><option value="">None</option>'+TP.map(t=>'<option value="'+t.id+'">'+esc(t.name)+"</option>").join("")+"</select></div>");
+ $("#tpl").onchange=e=>{const t=TP.find(x=>x.id===e.target.value);if(!t)return;$("#si").value=t.intention||"";$("#sn").value=t.notes||"";document.querySelectorAll("#chp .cp").forEach(b=>{const on=(t.chips||[]).includes(b.textContent);b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)})};
+ $("#ss").insertAdjacentHTML("afterend",'<button class="lk" id="stp" style="margin-top:14px;display:block">Save as template</button>');
+ $("#stp").onclick=async()=>{const n=prompt("Template name");if(!n||!n.trim())return;const t={t:"t",id:"t"+Date.now(),name:n.trim(),intention:$("#si").value.trim(),notes:$("#sn").value.trim(),chips:[...document.querySelectorAll("#chp .cp.on")].map(x=>x.textContent)};
+  await save(t);TP.push(t);$("#tpl").insertAdjacentHTML("beforeend",'<option value="'+t.id+'">'+esc(t.name)+"</option>");toast("Template saved.")}};
+/* payments and packages */
+const _cv2=clientView;
+clientView=function(){_cv2();const c=CL.find(x=>x.id===V.id);if(!c||!$("#px"))return;
+ const ps=PY.filter(x=>x.cid===c.id),pk=ps.reduce((a,x)=>a+(x.sess||0),0),used=SE.filter(x=>x.cid===c.id).length,paid=ps.reduce((a,x)=>a+(x.amt||0),0);
+ $("#px").insertAdjacentHTML("beforebegin",'<button class="li" id="py" style="margin-top:22px"><span class="ti">Payments and packages</span><small>'+(pk?(pk-used)+" of "+pk+" package sessions left, ":"")+"paid "+paid+"</small></button>");
+ $("#py").onclick=()=>payments(c)};
+function payments(c){const ps=PY.filter(x=>x.cid===c.id).sort((a,b)=>b.date.localeCompare(a.date));
+ sheet('<h3>Payments and packages</h3><div class="fl" style="margin-top:0"><label for="pk">Type</label><select class="in" id="pk"><option value="pay">Payment</option><option value="pkg">Package of sessions</option></select></div><div class="fl"><label for="pa">Amount paid</label><input class="in" id="pa" type="number" inputmode="decimal" min="0"></div><div class="fl" id="pnw" style="display:none"><label for="pn">Sessions in the package</label><input class="in" id="pn" type="number" inputmode="numeric" min="1"></div><div class="fl"><label for="pt">Note</label><input class="in" id="pt" maxlength="80"></div><button class="pb" id="pg3">Add entry</button><div style="margin-top:18px">'+ps.map(x=>'<div class="st"><span>'+fd(x.date)+", "+(x.sess?x.sess+"-session package, ":"")+x.amt+(x.note?"<small>"+esc(x.note)+"</small>":"")+'</span><div><button data-r="'+x.id+'">Receipt</button><button data-x="'+x.id+'">Delete</button></div></div>').join("")+"</div>");
+ $("#pk").onchange=e=>$("#pnw").style.display=e.target.value==="pkg"?"block":"none";
+ $("#pg3").onclick=async()=>{const pkg=$("#pk").value==="pkg",o={t:"p",id:"p"+Date.now(),cid:c.id,date:today(),amt:+$("#pa").value||0,sess:pkg?Math.max(1,+$("#pn").value||1):0,note:$("#pt").value.trim()};await save(o);PY.push(o);payments(c);cl()};
+ $("#sc").querySelectorAll("[data-x]").forEach(b=>b.onclick=async()=>{if(!confirm("Delete this entry?"))return;await CD.del("rec",b.dataset.x);PY=PY.filter(x=>x.id!==b.dataset.x);payments(c);cl()});
+ $("#sc").querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>receipt(c,PY.find(x=>x.id===b.dataset.r)))}
+async function receipt(c,x){try{toast("Preparing receipt\u2026");await loadJs("vendor/jspdf.umd.min.js");const d=new jspdf.jsPDF({unit:"pt",format:"a5"}),M=44;let y=M+10;
+ const ln=(t,f,st,sz,g)=>{d.setFont(f,st);d.setFontSize(sz);d.text(t,M,y);y+=sz*1.5+(g||0)};
+ ln("Receipt","times","normal",26,10);ln("Date: "+fd(x.date),"helvetica","normal",11);ln("Received from: "+c.name,"helvetica","normal",11);
+ ln("Amount: "+x.amt,"helvetica","bold",14,4);if(x.sess)ln("For: package of "+x.sess+" sessions","helvetica","normal",11);if(x.note)ln("Note: "+x.note,"helvetica","normal",11);
+ await saveFile("receipt-"+c.name.replace(/[^\w-]+/g,"-")+"-"+x.date+".pdf",d.output("blob"))}catch(e){toast("Could not make the receipt.")}}
+/* simple collections: glossary, technique cards, practice log (and Teaching later) */
+const WRAP='max-width:40rem;margin:0 auto;width:100%';
+async function coll(o){show("ex");const rows=await o.list(),ex=$("#ex");
+ ex.innerHTML='<div class="hd" style="padding:18px 0 10px;'+WRAP+'"><button class="lk" id="xb">'+o.back[0]+"</button><h1>"+o.title+'</h1><button class="lk" id="xa">Add</button></div><div style="'+WRAP+'">'+(o.head?o.head(rows):"")+
+  (rows.length?rows.map((r,i)=>{const t=o.row(r);return '<button class="li" data-i="'+i+'"><span class="ti">'+esc(t[0])+"</span>"+(t[1]?"<small>"+esc(t[1])+"</small>":"")+"</button>"}).join(""):'<div class="em">'+o.empty+"</div>")+"</div>";
+ $("#xb").onclick=o.back[1];ex.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>o.tab(b.dataset.t));$("#xa").onclick=()=>edit();ex.querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>edit(rows[+b.dataset.i]));
+ function edit(r){const n=!r;r=r||o.mk();
+  sheet("<h3>"+(n?"New":"Edit")+"</h3>"+o.fields.map(f=>'<div class="fl"><label for="f_'+f[0]+'">'+f[1]+"</label>"+(f[2]==="area"?'<textarea class="in" id="f_'+f[0]+'" rows="3">'+esc(r[f[0]]||"")+"</textarea>":'<input class="in" id="f_'+f[0]+'" type="'+(f[2]||"text")+'" value="'+esc(String(r[f[0]]==null?"":r[f[0]])).replace(/"/g,"&quot;")+'">')+"</div>").join("")+'<button class="pb" id="fs">Save</button>'+
+   (o.actions||[]).map((a,i)=>'<button class="lk" data-a="'+i+'" style="display:block;margin-top:14px">'+a[0]+"</button>").join("")+(n?"":'<button class="lk" id="fd" style="display:block;margin-top:14px;color:var(--soft)">Delete</button>'));
+  const read=()=>o.fields.forEach(f=>{const v=$("#f_"+f[0]).value;r[f[0]]=f[2]==="number"?(v===""?0:+v):v.trim()});
+  $("#fs").onclick=async()=>{read();if(!String(r[o.fields[0][0]]).trim())return $("#f_"+o.fields[0][0]).focus();await o.put(r);$("#sh").classList.remove("on");coll(o)};
+  $("#sc").querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>{read();o.actions[+b.dataset.a][1](r)});
+  if(!n)$("#fd").onclick=async()=>{if(!confirm("Delete this?"))return;await o.del(r.id);$("#sh").classList.remove("on");coll(o)}}}
+const libColl=(flag,more)=>Object.assign({back:["Library",()=>{show("lib");shelf()}],
+ list:async()=>(await DB.all("marks")).filter(r=>r[flag]===1),put:r=>DB.put("marks",r),del:id=>DB.del("marks",id)},more);
+const GLOSS=()=>libColl("gl",{title:"Glossary",empty:"No terms yet. Add words you want to remember, with their meaning.",fields:[["term","Term"],["def","Meaning","area"]],mk:()=>({id:"gl"+Date.now(),gl:1}),
+ row:r=>[r.term,(r.def||"").slice(0,90)],list:async()=>(await DB.all("marks")).filter(r=>r.gl===1).sort((a,b)=>a.term.localeCompare(b.term))});
+const TECH=()=>libColl("tc",{title:"Techniques",empty:"No technique cards yet. Add holds with their steps, cues and cautions.",fields:[["name","Hold or technique"],["steps","Steps","area"],["cues","Cues to feel for","area"],["contra","Contraindications","area"]],
+ mk:()=>({id:"tc"+Date.now(),tc:1}),row:r=>[r.name,r.contra?"Caution: "+r.contra.slice(0,70):""],list:async()=>(await DB.all("marks")).filter(r=>r.tc===1).sort((a,b)=>a.name.localeCompare(b.name))});
+const PLOG=()=>libColl("pl",{title:"Practice log",empty:"No entries yet. Log study time, practice swaps and classes toward your hours.",fields:[["date","Date","date"],["minutes","Minutes","number"],["kind","Kind (study, practice swap, class)"],["note","Note","area"]],
+ mk:()=>({id:"pl"+Date.now(),pl:1,date:today(),minutes:60,kind:"Practice swap"}),row:r=>[fd(r.date)+", "+r.minutes+" min",[r.kind,r.note].filter(Boolean).join(": ").slice(0,90)],
+ list:async()=>(await DB.all("marks")).filter(r=>r.pl===1).sort((a,b)=>b.date.localeCompare(a.date)),
+ head:rows=>{const m=rows.reduce((a,r)=>a+(+r.minutes||0),0);return '<div class="dg" style="padding:4px 0 10px">Total '+Math.floor(m/60)+" h "+m%60+" min logged</div>"}});
+$("#lg").onclick=()=>coll(GLOSS());$("#lt").onclick=()=>coll(TECH());$("#lp").onclick=()=>coll(PLOG());$("#ls").onclick=study;
+/* study cards: glossary terms, technique cards and your highlights, with simple spaced repetition */
+const GAP=[1,2,4,8,16,32],addDays=n=>{const d=new Date();d.setDate(d.getDate()+n);return d.toLocaleDateString("en-CA")};
+async function study(){show("ex");const[A,M]=await Promise.all([DB.all("marks"),DB.all("meta")]),T={};M.forEach(m=>T[m.id]=m.title);const st={};A.filter(r=>r.rv===1).forEach(r=>st[r.id]=r);
+ const cards=[];A.forEach(r=>{
+  if(r.gl===1&&r.def)cards.push({id:r.id,q:r.term,a:r.def,src:"Glossary"});
+  else if(r.tc===1&&(r.steps||r.cues))cards.push({id:r.id,q:r.name,a:[r.steps,r.cues].filter(Boolean).join("\n\n"),src:"Technique"});
+  else if(r.b&&r.text&&r.text.length>25){const w=(r.text.match(/[A-Za-z\u00C0-\u024F]{6,}/g)||[]).sort((x,y)=>y.length-x.length)[0];
+   cards.push({id:r.id,q:w?r.text.replace(w,"_____"):"Recall this passage.",a:r.text,src:T[r.b]||"Highlight"})}});
+ const due=cards.filter(c=>!st["rv"+c.id]||st["rv"+c.id].due<=today()).sort(()=>Math.random()-.5).slice(0,25);let i=0,seen=0;
+ const head='<div class="hd" style="padding:18px 0 10px;'+WRAP+'"><button class="lk" id="xb">Library</button><h1>Study</h1><span></span></div>';
+ const back=()=>{show("lib");shelf()};
+ const draw=rev=>{const ex=$("#ex");
+  if(i>=due.length){ex.innerHTML=head+'<div style="'+WRAP+'"><div class="em">'+(cards.length?(seen?"All done for now. You reviewed "+seen+(seen>1?" cards.":" card.")+" Come back tomorrow.":"Nothing is due today."):"No cards yet. Add glossary terms or technique cards, or highlight passages while reading.")+"</div></div>";$("#xb").onclick=back;return}
+  const c=due[i];ex.innerHTML=head+'<div style="'+WRAP+'"><div class="dg" style="padding:0 0 10px">'+(due.length-i)+" due. "+esc(c.src)+'</div><div class="card" style="white-space:pre-wrap">'+esc(rev?c.a:c.q)+"</div>"+
+   (rev?'<div style="display:flex;gap:12px"><button class="pb" id="ag" style="background:none;color:var(--acc);border:1px solid var(--acc)">Again</button><button class="pb" id="gd">Good</button></div>':'<button class="pb" id="sa">Show answer</button>')+"</div>";
+  $("#xb").onclick=back;
+  if(!rev)$("#sa").onclick=()=>draw(1);
+  else{const grade=async ok=>{const k="rv"+c.id,o=st[k]||{id:k,rv:1,box:0};o.box=ok?Math.min(o.box+1,GAP.length-1):0;o.due=addDays(ok?GAP[o.box]:1);st[k]=o;await DB.put("marks",o);seen++;if(!ok)due.push(c);i++;draw(0)};
+   $("#ag").onclick=()=>grade(0);$("#gd").onclick=()=>grade(1)}};
+ draw(0)}
+/* Teaching: students, lesson plans, handouts. Its own store, separate from Library and Clients */
+function idb(name,stores){let p;const open=()=>p||(p=new Promise((res,rej)=>{const r=indexedDB.open(name,1);r.onupgradeneeded=()=>stores.forEach(n=>r.result.createObjectStore(n,{keyPath:"id"}));r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}));
+ const tx=async(s,m,f)=>{const d=await open();return new Promise((res,rej)=>{const t=d.transaction(s,m);const o=f(t);t.oncomplete=()=>res(o&&o.result);t.onerror=()=>rej(t.error)})};
+ return{all:s=>tx(s,"readonly",t=>t.objectStore(s).getAll()),put:(s,v)=>tx(s,"readwrite",t=>{t.objectStore(s).put(v)}),del:(s,k)=>tx(s,"readwrite",t=>{t.objectStore(s).delete(k)})}}
+const TDB=idb("stillpoint-teaching",["rec"]);
+const tcoll=(k,more)=>Object.assign({back:["Home",()=>show("home")],tab:t=>teach(t),
+ list:async()=>(await TDB.all("rec")).filter(r=>r.k===k),put:r=>TDB.put("rec",r),del:id=>TDB.del("rec",id),
+ head:()=>'<div class="lkr" style="padding:0 0 8px">'+[["students","Students"],["lessons","Lesson plans"],["handouts","Handouts"]].map(t=>'<button class="lk" data-t="'+t[0]+'"'+(t[0]===k?' style="font-weight:700"':"")+">"+t[1]+"</button>").join("")+'<button class="lk" id="tbk" style="color:var(--soft)">Back up</button><label class="lk" style="cursor:pointer;color:var(--soft)">Restore<input id="trs" type="file" accept=".json,application/json" hidden></label></div>'},more);
+const TK={
+ students:()=>tcoll("students",{title:"Teaching",empty:"No students yet. Add first names only.",fields:[["name","First name"],["hours","Practice hours logged","number"],["classes","Classes attended","number"],["notes","Notes","area"]],mk:()=>({id:"st"+Date.now(),k:"students"}),
+  row:r=>[r.name,(r.hours||0)+" practice hours, "+(r.classes||0)+(r.classes===1?" class":" classes")],list:async()=>(await TDB.all("rec")).filter(r=>r.k==="students").sort((a,b)=>a.name.localeCompare(b.name))}),
+ lessons:()=>tcoll("lessons",{title:"Teaching",empty:"No lesson plans yet. Outline a class with its timing and materials.",fields:[["title","Lesson title"],["date","Date","date"],["minutes","Length in minutes","number"],["outline","Outline","area"],["materials","Materials","area"]],mk:()=>({id:"ls"+Date.now(),k:"lessons",date:today(),minutes:90}),
+  row:r=>[r.title,(r.date?fd(r.date)+", ":"")+(r.minutes||0)+" min"],list:async()=>(await TDB.all("rec")).filter(r=>r.k==="lessons").sort((a,b)=>(b.date||"").localeCompare(a.date||""))}),
+ handouts:()=>tcoll("handouts",{title:"Teaching",empty:"No handouts yet. Write one, then make it a PDF to share.",fields:[["title","Title"],["body","Text","area"]],mk:()=>({id:"ho"+Date.now(),k:"handouts"}),
+  row:r=>[r.title,(r.body||"").slice(0,80)],list:async()=>(await TDB.all("rec")).filter(r=>r.k==="handouts").sort((a,b)=>a.title.localeCompare(b.title)),actions:[["Make PDF",r=>handout(r)]]})};
+async function teach(k){await coll(TK[k||"students"]());
+ $("#tbk").onclick=async()=>saveFile("stillpoint-teaching-"+stamp()+".json",JSON.stringify({app:"stillpoint",kind:"teaching",v:1,rec:await TDB.all("rec")}));
+ $("#trs").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;try{const j=JSON.parse(await f.text());if(j.kind!=="teaching")throw 0;for(const r of j.rec)await TDB.put("rec",r);toast("Teaching restored.");teach(k)}catch(x){toast("That is not a Stillpoint teaching backup.")}}}
+async function handout(r){try{toast("Preparing PDF\u2026");await loadJs("vendor/jspdf.umd.min.js");const d=new jspdf.jsPDF({unit:"pt",format:"a4"}),W=d.internal.pageSize.getWidth(),H=d.internal.pageSize.getHeight(),M=56;let y=M;
+ d.setFont("times","normal");d.setFontSize(24);for(const l of d.splitTextToSize(r.title,W-2*M)){d.text(l,M,y+24);y+=32}y+=10;d.setFontSize(12);
+ for(const l of d.splitTextToSize(r.body||"",W-2*M)){if(y+18>H-M){d.addPage();y=M;d.setFont("times","normal");d.setFontSize(12)}d.text(l,M,y+12);y+=18}
+ await saveFile("handout-"+r.title.replace(/[^\w-]+/g,"-")+".pdf",d.output("blob"))}catch(e){toast("Could not make the PDF.")}}
+$("#d3").onclick=()=>teach("students");
+if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+home();
+</script>
+</body>
+</html>

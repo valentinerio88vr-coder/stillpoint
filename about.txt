@@ -1,0 +1,33 @@
+                                 64 DOORS ONE INFINITE CORRIDOR 
+                     MADE WITH LOVE (HEART SYMBOL) (RED COLOR ) BY Empathy Studios
+
+Creative: Norman james 
+Client :  Poonam Mahendra 
+
+about the app -                       About Stillpoint
+
+Stillpoint is a quiet, offline-first sanctuary designed specifically for Craniosacral Therapy (CST) and somatic practitioners, students, and educators. Built to be fast, tactile, and completely private, it brings your clinical practice, reference library, and teaching materials into a single, distraction-free workspace that lives entirely on your device.
+
+Zero Cloud, Complete Privacy
+Your data never touches an external server. Every book, highlight, lesson plan, and client record stays locally in your browser's storage. Client notes and session logs are locked behind a personal PIN using strong local encryption (AES-GCM), with support for fingerprint or Face ID unlock and an offline recovery phrase—giving you total peace of mind without subscriptions or accounts.
+
+Core Spaces
+
+Library & Study: Ingest text-based books and illustrated reference folders, read with customizable editorial typography and audio narration, highlight key passages, and build spaced-repetition flashcards from your own glossary and technique cards.
+
+Clients: Track client goals, contraindications, and session histories using somatic observation chips, an interactive front-and-back anatomical body map, follow-up reminders, payment packages, and clean PDF summaries.
+
+Teaching: Organize student practice hours, structure class lesson plans, and export clean, printable PDF handouts.
+
+Built to Last
+Designed as an installable Progressive Web App, Stillpoint works seamlessly offline on phones, tablets, and desktops—giving you a calm, reliable tool in the treatment room, classroom, or study.
+
+
+complete source project on github-    https://github.com/jkeylight?tab=repositories
+                                      https://github.com/jkeylight/still-point-2
+
+
+demo project-1                        https://still-point-rho.vercel.app/ 
+
+demo project-2                        https://still-point-2.vercel.app/
+
