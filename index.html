@@ -161,7 +161,7 @@ function chapters(P){const C=[];let cur=null;
 function coverData(title,author,id){
  const palettes=[["#203b57","#f1e9dc"],["#7b3f43","#f5e9d7"],["#45584c","#e8e6d8"],["#b18a52","#1d2630"],["#5a526f","#f0e8dc"],["#314f58","#f2e9d8"]];
  let h=0;for(const ch of id)h=(h*31+ch.charCodeAt(0))>>>0;const [bg,fg]=palettes[h%palettes.length];
- const words=String(title||"Untitled").split(/\\s+/),lines=[];let line="";
+ const words=String(title||"Untitled").split(/\s+/),lines=[];let line="";
  for(const w of words){if((line+" "+w).trim().length>17&&line){lines.push(line);line=w}else line=(line+" "+w).trim()}if(line)lines.push(line);
  const escXml=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
  const titleSvg=lines.slice(0,5).map((v,i)=>'<text x="28" y="'+(185+i*34)+'" font-family="Georgia,serif" font-size="26" font-style="italic" fill="'+fg+'">'+escXml(v)+'</text>').join("");
